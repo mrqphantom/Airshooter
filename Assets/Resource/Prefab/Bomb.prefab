@@ -9522,6 +9522,7 @@ GameObject:
   - component: {fileID: 7051996054864494247}
   - component: {fileID: 7051996054864494246}
   - component: {fileID: 7051996054864494249}
+  - component: {fileID: 8643110978623971874}
   m_Layer: 0
   m_Name: Bomb
   m_TagString: Untagged
@@ -9537,7 +9538,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7051996054864494242}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.013414466, y: 0.9552252, z: -0.0094}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7374363402056829398}
@@ -9603,6 +9604,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosion: {fileID: 9104729261587473013, guid: 3d21fb63b20fe5b4ab5f29ccdd1b3a2f,
     type: 3}
+  playerExplosion: {fileID: 1418490148302035325, guid: e86c6138d1be7bc4fb0c9457a1813a3d,
+    type: 3}
+  player: {fileID: 0}
+--- !u!114 &8643110978623971874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7051996054864494242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2798461f73f327b49ae2254678a18330, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: -0.3
+  rigid: {fileID: 0}
 --- !u!1001 &7051996052966108733
 PrefabInstance:
   m_ObjectHideFlags: 0
