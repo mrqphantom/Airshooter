@@ -20,21 +20,31 @@ public class PlayerController : MonoBehaviour
     public float fireRate;
     private float nextFire;
     public Light light;
+    public GameObject muzzle1,muzzle2;
     void Start()
     {
         rigid = GetComponent<Rigidbody>();
+      
     }
     void Update()
     {
         if ((Input.GetKey(KeyCode.Space))&& Time.time> nextFire)
         {
+            muzzle1.SetActive(true);
+            muzzle2.SetActive(true);
             nextFire = Time.time + fireRate;
             Instantiate(bullet, firePoint1.position,firePoint1.rotation);
             Instantiate(bullet, firePoint2.position, firePoint2.rotation);
             Instantiate(light, lightpoint.position, lightpoint.rotation);
           
 
-        };
+        }
+        else
+        {
+            muzzle1.SetActive(false);
+            muzzle2.SetActive(false);
+        }
+       
     }
        void FixedUpdate()
     {
