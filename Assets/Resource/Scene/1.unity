@@ -215,6 +215,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6110608520073126683, guid: 14f96382ec5e00b428d4980c52052cda,
         type: 3}
+      propertyPath: rocket
+      value: 
+      objectReference: {fileID: 8258845061942475200, guid: dfc21ac7bb10b5443aa73e078574872a,
+        type: 3}
+    - target: {fileID: 6110608520073126683, guid: 14f96382ec5e00b428d4980c52052cda,
+        type: 3}
       propertyPath: muzzle1
       value: 
       objectReference: {fileID: 680420531}
@@ -227,6 +233,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 'Player '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6110608520717313570, guid: 14f96382ec5e00b428d4980c52052cda,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6110608520717313570, guid: 14f96382ec5e00b428d4980c52052cda,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6110608520717313570, guid: 14f96382ec5e00b428d4980c52052cda,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.70710677
+      objectReference: {fileID: 0}
+    - target: {fileID: 6110608520717313570, guid: 14f96382ec5e00b428d4980c52052cda,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.70710677
+      objectReference: {fileID: 0}
+    - target: {fileID: 6110608520717313570, guid: 14f96382ec5e00b428d4980c52052cda,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6110608520717313570, guid: 14f96382ec5e00b428d4980c52052cda,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6110608520717313570, guid: 14f96382ec5e00b428d4980c52052cda,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 270
       objectReference: {fileID: 0}
     - target: {fileID: 6435316257678380888, guid: 14f96382ec5e00b428d4980c52052cda,
         type: 3}
@@ -597,7 +638,7 @@ MonoBehaviour:
   bomb: {fileID: 7051996054864494242, guid: 2f994f64daeaf464aa3c1b60bf515627, type: 3}
   spawnValues: {x: 0, y: 1.614, z: 0}
   waitWave: 1
-  bombCount: 20
+  bombCount: 10
   startWave: 0.4
   waitBomb: 0.5
   player: {fileID: 0}

@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     private float nextFire;
     public Light light;
     public GameObject muzzle1,muzzle2;
+    public GameObject rocket;
     void Start()
     {
         rigid = GetComponent<Rigidbody>();
@@ -36,6 +37,7 @@ public class PlayerController : MonoBehaviour
             Instantiate(bullet, firePoint1.position,firePoint1.rotation);
             Instantiate(bullet, firePoint2.position, firePoint2.rotation);
             Instantiate(light, lightpoint.position, lightpoint.rotation);
+            Instantiate(rocket, lightpoint.position,Quaternion.identity);
           
 
         }
