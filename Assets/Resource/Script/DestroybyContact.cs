@@ -4,23 +4,44 @@ using UnityEngine;
 
 public class DestroybyContact : MonoBehaviour
 {
-    public GameObject explosion;
+    public GameObject explosion, playerExplosion, player;
+    
+
     void Start()
     {
-
+        player = GameObject.FindWithTag("Player");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+        // Update is called once per frame
+        void Update()
+        {
 
-    }
-    private void OnTriggerEnter(Collider other)
+        }
+        void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Boundary"))
+            { return; }
+        Instantiate(explosion, transform.position, transform.rotation);
+
+        if (other.CompareTag("Player"))
+            {
+            
+            StartCoroutine(DelayExplosion());
+            
+            return;
+            }
+            
+            Destroy(other.gameObject);
+            Destroy(gameObject);
+        }
+      IEnumerator DelayExplosion()
     {
-        if(other.CompareTag("Boundary"))
-        { return; }
-        Instantiate(explosion, transform.position,transform.rotation );
-        Destroy(other.gameObject);
+        yield return new WaitForSeconds(0.02f);
+        Destroy(player);
+        Instantiate(playerExplosion, player.transform.position, player.transform.rotation);
         Destroy(gameObject);
+        
+       
     }
-}
+    }
+
