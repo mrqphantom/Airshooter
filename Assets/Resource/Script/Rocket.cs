@@ -21,11 +21,11 @@ public class Rocket : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
-        Vector3 targetDirection = target.position - transform.position;
-        Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, 45f, 0.0f);
-        Debug.DrawRay(transform.position, newDirection, Color.red);
-        transform.rotation = Quaternion.LookRotation(newDirection);
+
+        //Vector3 targetDirection = target.position - transform.position;
+        //Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, 45f, 0.0f);
+        // Debug.DrawRay(transform.position, newDirection, Color.red);
+        transform.rotation = Quaternion.Slerp(transform.rotation, target.rotation, 0.2f);
         transform.position = Vector3.MoveTowards(transform.position,target.position, 0.01f);
      
       

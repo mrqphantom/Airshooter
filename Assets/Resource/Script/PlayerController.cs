@@ -22,10 +22,13 @@ public class PlayerController : MonoBehaviour
     public Light light;
     public GameObject muzzle1,muzzle2;
     public GameObject rocket;
+    public GameObject target;
+    public Transform rocket_launcher;
     void Start()
     {
         rigid = GetComponent<Rigidbody>();
-      
+       
+
     }
     void Update()
     {
@@ -37,7 +40,7 @@ public class PlayerController : MonoBehaviour
             Instantiate(bullet, firePoint1.position,firePoint1.rotation);
             Instantiate(bullet, firePoint2.position, firePoint2.rotation);
             Instantiate(light, lightpoint.position, lightpoint.rotation);
-            Instantiate(rocket, lightpoint.position,Quaternion.identity);
+            Instantiate(rocket, rocket_launcher.position,rocket_launcher.rotation);
           
 
         }
