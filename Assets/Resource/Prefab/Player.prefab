@@ -155,9 +155,12 @@ MonoBehaviour:
   firePoint1: {fileID: 6110608519109390051}
   firePoint2: {fileID: 6110608519349479712}
   lightpoint: {fileID: 6110608520717313570}
+  rocketPoint: {fileID: 0}
   fireRate: 0.2
   light: {fileID: 7874083012217195556, guid: 9c855632915d1e140b2cfab7eaa56852, type: 3}
-  muzzle: {fileID: 2054114399973653191, guid: 6f3782ae5db408c4085777ac9423f9c6, type: 3}
+  muzzle1: {fileID: 0}
+  muzzle2: {fileID: 0}
+  rocket: {fileID: 0}
 --- !u!1 &6110608520717313571
 GameObject:
   m_ObjectHideFlags: 0

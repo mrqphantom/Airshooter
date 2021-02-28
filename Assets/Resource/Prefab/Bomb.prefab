@@ -9519,10 +9519,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7051996054864494245}
   - component: {fileID: 7051996054864494244}
-  - component: {fileID: 7051996054864494247}
   - component: {fileID: 7051996054864494246}
   - component: {fileID: 7051996054864494249}
   - component: {fileID: 8643110978623971874}
+  - component: {fileID: -4133467356129856975}
   m_Layer: 0
   m_Name: Bomb
   m_TagString: Enemy
@@ -9560,20 +9560,6 @@ CapsuleCollider:
   m_Height: 0.01
   m_Direction: 0
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7051996054864494247
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7051996054864494242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7b219825536d1c45acfe64d116d8e3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tumb: 5
-  rigid: {fileID: 0}
 --- !u!54 &7051996054864494246
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9620,6 +9606,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: -0.3
+  rigid: {fileID: 0}
+--- !u!114 &-4133467356129856975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7051996054864494242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7b219825536d1c45acfe64d116d8e3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tumb: 2
   rigid: {fileID: 0}
 --- !u!1001 &7051996052966108733
 PrefabInstance:

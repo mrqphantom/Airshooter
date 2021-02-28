@@ -16,16 +16,19 @@ public class PlayerController : MonoBehaviour
     public float tilt;
     public Rigidbody rigid;
     public GameObject bullet;
-    public Transform firePoint1, firePoint2, lightpoint;
+    public Transform firePoint1, firePoint2, lightpoint,rocketPoint;
     public float fireRate;
     private float nextFire;
+    public float fireRocketRate;
+    private float nextRocket;
     public Light light;
     public GameObject muzzle1,muzzle2;
     public GameObject rocket;
+    RocketLauncher rocketLauncher;
     void Start()
     {
         rigid = GetComponent<Rigidbody>();
-      
+        rocketLauncher = GameObject.FindGameObjectWithTag("Launcher").GetComponent<RocketLauncher>();
     }
     void Update()
     {
@@ -37,7 +40,7 @@ public class PlayerController : MonoBehaviour
             Instantiate(bullet, firePoint1.position,firePoint1.rotation);
             Instantiate(bullet, firePoint2.position, firePoint2.rotation);
             Instantiate(light, lightpoint.position, lightpoint.rotation);
-            Instantiate(rocket, lightpoint.position,Quaternion.identity);
+            
           
 
         }
@@ -46,7 +49,13 @@ public class PlayerController : MonoBehaviour
             muzzle1.SetActive(false);
             muzzle2.SetActive(false);
         }
-       
+        if (Input.GetKey(KeyCode.E) && Time.time > nextRocket)
+        {
+            nextRocket = Time.time + fireRocketRate;
+            StartCoroutine(rocketLauncher.launchRocket());
+        }
+
+
     }
        void FixedUpdate()
     {
@@ -62,4 +71,5 @@ public class PlayerController : MonoBehaviour
         rigid.rotation = Quaternion.Euler(90f, rigid.velocity.x * -tilt , 180f);
 
     }
+   
 }
