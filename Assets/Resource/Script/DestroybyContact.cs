@@ -23,7 +23,7 @@ public class DestroybyContact : MonoBehaviour
             { return; }
         Instantiate(explosion, transform.position, transform.rotation);
 
-        if (other.CompareTag("Player"))
+             if (other.CompareTag("Player"))
             {
             
             StartCoroutine(DelayExplosion());

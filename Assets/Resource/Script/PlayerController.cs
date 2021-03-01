@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
         {
             muzzle1.SetActive(false);
             muzzle2.SetActive(false);
-        }
+       }
         if (Input.GetKey(KeyCode.E) && Time.time > nextRocket)
         {
             nextRocket = Time.time + fireRocketRate;

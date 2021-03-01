@@ -14,20 +14,16 @@ public class Rocket2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        targets= GameObject.FindGameObjectsWithTag("Enemy");
-        rigid = GetComponent<Rigidbody>();
+        
      
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(targets.Length==1 && targets.Length==0)
-        {
-            Instantiate(Explosion, transform.position,transform.rotation);
-            Destroy(gameObject, 0.2f);
-            return;
-        }
+        targets = GameObject.FindGameObjectsWithTag("Enemy");
+        rigid = GetComponent<Rigidbody>();
+        
        
         GameObject closetTarget = targets[0];
         float closetDistance = Vector3.Distance(transform.position, closetTarget.transform.position);
@@ -48,7 +44,18 @@ public class Rocket2 : MonoBehaviour
             rigid.velocity = transform.forward * speed;
 
 
-        }
 
+        }
+        for(var i = targets.Length-1;i>=0;i--)
+        {
+            if(targets[i]==null)
+
+            {
+                targets[i]
+            }
+        }
+       
+
+        }
     }
-    }
+    
