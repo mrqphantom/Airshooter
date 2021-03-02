@@ -737,7 +737,7 @@ MonoBehaviour:
   waitWave: 1
   bombCount: 10
   startWave: 0.4
-  waitBomb: 0.5
+  waitBomb: 0.3
   player: {fileID: 0}
 --- !u!4 &726634014
 Transform:
@@ -762,8 +762,13 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3801934618972539171, guid: 21c556c35ab0d0a41b202d1a698f7700,
         type: 3}
+      propertyPath: rocketCount
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3801934618972539171, guid: 21c556c35ab0d0a41b202d1a698f7700,
+        type: 3}
       propertyPath: WaiteachRocket
-      value: 0.3
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 5483336016335562638, guid: 21c556c35ab0d0a41b202d1a698f7700,
         type: 3}
@@ -788,7 +793,7 @@ PrefabInstance:
     - target: {fileID: 5483336016335562638, guid: 21c556c35ab0d0a41b202d1a698f7700,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5483336016335562638, guid: 21c556c35ab0d0a41b202d1a698f7700,
         type: 3}
@@ -798,7 +803,7 @@ PrefabInstance:
     - target: {fileID: 5483336016335562638, guid: 21c556c35ab0d0a41b202d1a698f7700,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5483336016335562638, guid: 21c556c35ab0d0a41b202d1a698f7700,
         type: 3}
@@ -813,7 +818,7 @@ PrefabInstance:
     - target: {fileID: 5483336016335562638, guid: 21c556c35ab0d0a41b202d1a698f7700,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5483336016335562638, guid: 21c556c35ab0d0a41b202d1a698f7700,
         type: 3}
