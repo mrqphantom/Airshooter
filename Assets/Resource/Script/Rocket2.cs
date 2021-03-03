@@ -29,13 +29,12 @@ public class Rocket2 : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         if (targets.Length == 0)
         {
-
             
-            rigid.angularVelocity = transform.forward * speed;
+            rigid.AddForce(transform.position * speed,ForceMode.Acceleration);
             return;
             
         }
-        if (targets.Length >= 1)
+       if(targets.Length >= 1)
         {
             GameObject closetTarget = targets[0];
             float closetDistance = Vector3.Distance(transform.position, closetTarget.transform.position);
@@ -53,6 +52,7 @@ public class Rocket2 : MonoBehaviour
             }
             var rocketRotation = Quaternion.LookRotation(closetTarget.transform.position - transform.position);
             rigid.MoveRotation(Quaternion.RotateTowards(transform.rotation, rocketRotation, Random.Range(minturn, maxturn)));
+            speed += Time.deltaTime;
             rigid.velocity = transform.forward * speed;
 
 

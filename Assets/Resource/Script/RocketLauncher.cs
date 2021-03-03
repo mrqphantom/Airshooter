@@ -21,10 +21,8 @@ public class RocketLauncher : MonoBehaviour
 
         for (int i = 0; i < rocketCount; i++)
         {
-            
-            Instantiate(rocket, transform.position, Quaternion.Euler(90f, 0,0 ));
+            Instantiate(rocket, transform.position, transform.rotation);
             yield return new WaitForSeconds(WaiteachRocket);
-
         }
     }
 }
