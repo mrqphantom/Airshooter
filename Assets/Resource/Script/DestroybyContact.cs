@@ -15,9 +15,16 @@ public class DestroybyContact : MonoBehaviour
         // Update is called once per frame
         void Update()
         {
-
+        
         }
-        void OnTriggerEnter(Collider other)
+         void OnParticleCollision(GameObject other)
+         {
+             Instantiate(explosion, transform.position, transform.rotation);
+        Destroy(gameObject);
+         }
+
+
+    void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Boundary"))
             { return; }

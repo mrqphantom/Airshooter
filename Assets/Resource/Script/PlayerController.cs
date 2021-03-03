@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     public float tilt;
     public Rigidbody rigid;
     public GameObject bullet;
-    public Transform firePoint1, firePoint2, lightpoint,rocketPoint;
+    public Transform firePoint1, firePoint2, lightpoint,hazePoint;
     public float fireRate;
     private float nextFire;
     public float fireRocketRate;
@@ -25,10 +25,12 @@ public class PlayerController : MonoBehaviour
     public GameObject muzzle1,muzzle2;
     public GameObject rocket;
     RocketLauncher rocketLauncher;
+    public ParticleSystem haze;
     void Start()
     {
         rigid = GetComponent<Rigidbody>();
         rocketLauncher = GameObject.FindGameObjectWithTag("Launcher").GetComponent<RocketLauncher>();
+        haze.Stop();
     }
     void Update()
     {
@@ -54,7 +56,11 @@ public class PlayerController : MonoBehaviour
             nextRocket = Time.time + fireRocketRate;
             StartCoroutine(rocketLauncher.launchRocket());
         }
-
+        if(Input.GetKey(KeyCode.Q))
+        {
+            Instantiate(haze, hazePoint.position, hazePoint.rotation);
+          
+        }
 
     }
        void FixedUpdate()

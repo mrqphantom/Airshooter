@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class PartilceDestroy : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void OnTriggerEnter(Collider other)
+    public ParticleSystem part;
+  void Start()
     {
-        Destroy(other.gameObject);
-     
+        part = GetComponent<ParticleSystem>();
+    }
+    void OnParticleCollision(GameObject other)
+    {   
+            Debug.Log("Chamroi");
+            Destroy(other.gameObject);
+        
     }
 
 }
