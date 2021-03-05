@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem haze;
     void Start()
     {
+        muzzle1.SetActive(false);
+        muzzle2.SetActive(false);
         rigid = GetComponent<Rigidbody>();
         rocketLauncher = GameObject.FindGameObjectWithTag("Launcher").GetComponent<RocketLauncher>();
         haze.Stop();
