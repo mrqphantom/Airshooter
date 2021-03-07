@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     public float tilt;
     public Rigidbody rigid;
     public GameObject bullet;
-    public Transform firePoint1, firePoint2, lightpoint,hazePoint;
+    public Transform firePoint1, firePoint2, lightpoint,hazePoint,lazePoint;
     public float fireRate;
     private float nextFire;
     public float fireRocketRate;
@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
     public GameObject rocket;
     RocketLauncher rocketLauncher;
     public ParticleSystem haze;
+    public GameObject laze;
+    bool Rpressed = false;
     void Start()
     {
         muzzle1.SetActive(false);
@@ -63,9 +65,22 @@ public class PlayerController : MonoBehaviour
             Instantiate(haze, hazePoint.position, hazePoint.rotation);
           
         }
+        if ((Input.GetKeyDown(KeyCode.R)) && !Rpressed)
+        {
+            spawnlaze();
+        }
+       
+           
+        
+        void spawnlaze()
+        {
+            GameObject a= Instantiate(laze, lazePoint.position, lazePoint.rotation).gameObject;
+            a.AddComponent<DestroyAfterTime>();
+        }
+
 
     }
-       void FixedUpdate()
+    void FixedUpdate()
     {
         float moveX = Input.GetAxis("Horizontal");
         float moveY = Input.GetAxis("Vertical");
