@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
         void spawnlaze()
         {
             GameObject a= Instantiate(laze, lazePoint.position, lazePoint.rotation).gameObject;
-            a.AddComponent<DestroyAfterTime>();
+            Destroy(a);
         }
 
 

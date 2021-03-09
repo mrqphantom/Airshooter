@@ -9,6 +9,8 @@ public class Lazer : MonoBehaviour
     public Color color = Color.blue;
     public LineRenderer lineRenderer;
     Transform LauncherLaze;
+     public MeshCollider meshCollider;
+    public Mesh mesh;
     int length;
     
     public GameObject[] targets;
@@ -16,23 +18,24 @@ public class Lazer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        LauncherLaze = GameObject.FindWithTag("LauncherLaze").transform;
-        lineRenderer = GetComponent<LineRenderer>();
+
         
-        lineRenderer.startWidth = lazerWith;
-        lineRenderer.endWidth = lazerWith;
-   
+
     }
 
     // Update is called once per frame
     void Update()
-    {   
-        
-        
-        targets = GameObject.FindGameObjectsWithTag("Enemy");
+    {
+       
+       
+        LauncherLaze = GameObject.FindWithTag("LauncherLaze").transform;
+        lineRenderer = GetComponent<LineRenderer>();
+     
+       targets = GameObject.FindGameObjectsWithTag("Enemy");
         if(targets.Length == 0)
         {
             lineRenderer.SetPosition(1, LauncherLaze.transform.up * 500);
+            return;
         }
    if(targets.Length >= 1)
         {   
@@ -51,26 +54,25 @@ public class Lazer : MonoBehaviour
                 }
             }
             
+          
             lineRenderer.SetPosition(0, LauncherLaze.position);
             RaycastHit hit;
             if (Physics.Raycast(LauncherLaze.position, transform.forward, out hit))
             {
                 if (hit.collider)
                 {
-                    
+         
                     lineRenderer.SetPosition(1,closettarget.transform.position);
-                   
-
+                    closettarget.transform.localScale -= new Vector3(2f , 2f, 2f)*Time.deltaTime;
+                    Destroy(closettarget, 0.5f);
 
                 }
             }
             else
                 lineRenderer.SetPosition(1, transform.up* 500);
         }
-        MeshCollider meshCollider = GetComponent<MeshCollider>();
-        Mesh mesh = new Mesh();
-        lineRenderer.BakeMesh(mesh, true);
-        meshCollider.sharedMesh = mesh;
+       
+       
 
 
     }

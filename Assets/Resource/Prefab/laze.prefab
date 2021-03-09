@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2655897688062882687}
   - component: {fileID: 2655897688062882686}
   - component: {fileID: 2655897688062882672}
-  - component: {fileID: 859660263366177048}
+  - component: {fileID: -3683226629696328292}
   m_Layer: 0
   m_Name: laze
   m_TagString: Untagged
@@ -74,7 +74,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 2, y: 2, z: 2}
+  - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -146,8 +146,10 @@ MonoBehaviour:
   maxlength: 20
   color: {r: 0.8490566, g: 0.2979556, b: 0, a: 1}
   lineRenderer: {fileID: 2655897688062882686}
+  meshCollider: {fileID: -3683226629696328292}
+  mesh: {fileID: 0}
   targets: []
---- !u!64 &859660263366177048
+--- !u!64 &-3683226629696328292
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

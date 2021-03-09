@@ -27,11 +27,10 @@ Transform:
   m_GameObject: {fileID: 7051996053372035873}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 7051996054188504269}
+  m_LocalScale: {x: 1.4149, y: 1.4149, z: 1.4149}
+  m_Children: []
   m_Father: {fileID: 7051996054864494245}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &7051996053372035874
 ParticleSystem:
@@ -108,7 +107,7 @@ ParticleSystem:
       m_RotationOrder: 4
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
-  scalingMode: 1
+  scalingMode: 0
   randomSeed: 0
   InitialModule:
     serializedVersion: 3
@@ -4782,10 +4781,10 @@ Transform:
   m_GameObject: {fileID: 7051996054188504266}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.47343, y: 0.47343, z: 0.47343}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 7051996053372035872}
-  m_RootOrder: 0
+  m_Father: {fileID: 7051996054864494245}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &7051996054188504271
 ParticleSystem:
@@ -4862,7 +4861,7 @@ ParticleSystem:
       m_RotationOrder: 4
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
-  scalingMode: 1
+  scalingMode: 0
   randomSeed: 0
   InitialModule:
     serializedVersion: 3
@@ -5040,7 +5039,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 3
       scalar: 0.05
-      minScalar: 0.3
+      minScalar: 0.1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -9489,7 +9488,7 @@ ParticleSystemRenderer:
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
-  m_MaxParticleSize: 0.5
+  m_MaxParticleSize: 999999
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
   m_LengthScale: 2
@@ -9539,9 +9538,10 @@ Transform:
   m_GameObject: {fileID: 7051996054864494242}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.74456, y: 0.74456, z: 0.74456}
   m_Children:
   - {fileID: 7374363402056829398}
+  - {fileID: 7051996054188504269}
   - {fileID: 7051996053372035872}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -9619,7 +9619,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7b219825536d1c45acfe64d116d8e3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tumb: 2
+  tumb: 4
   rigid: {fileID: 0}
 --- !u!1001 &7051996052966108733
 PrefabInstance:
