@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     RocketLauncher rocketLauncher;
     public ParticleSystem haze;
     public GameObject laze;
-    public GameObject obj = null;
+    GameObject obj = null;
     bool Rpressed = false;
     void Start()
     {

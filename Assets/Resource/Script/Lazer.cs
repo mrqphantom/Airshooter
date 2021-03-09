@@ -9,17 +9,28 @@ public class Lazer : MonoBehaviour
     public Color color = Color.blue;
     public LineRenderer lineRenderer;
     Transform LauncherLaze;
-     public MeshCollider meshCollider;
-    public Mesh mesh;
+    MeshCollider meshCollider;
+    Mesh mesh;
+    ParticleSystem particleHitActive;
+    public ParticleSystem hitParticle;
+    bool partilceOnce = false;
     int length;
+  
     
     public GameObject[] targets;
     float thisDistance;
     // Start is called before the first frame update
     void Start()
     {
+        lineRenderer = lineRenderer.GetComponent<LineRenderer>();
+        meshCollider = gameObject.AddComponent<MeshCollider>();
 
-        
+
+        Mesh mesh = new Mesh();
+        lineRenderer.BakeMesh(mesh, true);
+        meshCollider.sharedMesh = mesh;
+
+
 
     }
 
@@ -27,11 +38,13 @@ public class Lazer : MonoBehaviour
     void Update()
     {
        
-       
+
         LauncherLaze = GameObject.FindWithTag("LauncherLaze").transform;
-        lineRenderer = GetComponent<LineRenderer>();
-     
-       targets = GameObject.FindGameObjectsWithTag("Enemy");
+       
+
+        lineRenderer.SetPosition(0, LauncherLaze.position);
+
+        targets = GameObject.FindGameObjectsWithTag("Enemy");
         if(targets.Length == 0)
         {
             lineRenderer.SetPosition(1, LauncherLaze.transform.up * 500);
@@ -54,8 +67,7 @@ public class Lazer : MonoBehaviour
                 }
             }
             
-          
-            lineRenderer.SetPosition(0, LauncherLaze.position);
+    
             RaycastHit hit;
             if (Physics.Raycast(LauncherLaze.position, transform.forward, out hit))
             {
@@ -63,9 +75,18 @@ public class Lazer : MonoBehaviour
                 {
          
                     lineRenderer.SetPosition(1,closettarget.transform.position);
-                    closettarget.transform.localScale -= new Vector3(2f , 2f, 2f)*Time.deltaTime;
+                   
+                    closettarget.GetComponent<Mover>().run(0f);
+                    
+                    if (!partilceOnce)
+                    {
+                        particleHitActive = Instantiate(hitParticle, closettarget.transform.position, closettarget.transform.rotation);
+                        
+                        partilceOnce = true;
+                    }
                     Destroy(closettarget, 0.5f);
-
+                    Destroy(gameObject, 0.5f);
+                    Destroy(particleHitActive, 0.5f);
                 }
             }
             else

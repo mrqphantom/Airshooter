@@ -15,6 +15,8 @@ public class Mover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rigid.velocity = new Vector3(0, speed, 0);
+        run(speed);
     }
+    public void run(float speedVelocity)
+    { rigid.velocity = new Vector3(0, speedVelocity, 0); }
 }

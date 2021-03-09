@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2655897688062882687}
   - component: {fileID: 2655897688062882686}
   - component: {fileID: 2655897688062882672}
-  - component: {fileID: -3683226629696328292}
   m_Layer: 0
   m_Name: laze
   m_TagString: Untagged
@@ -146,20 +145,8 @@ MonoBehaviour:
   maxlength: 20
   color: {r: 0.8490566, g: 0.2979556, b: 0, a: 1}
   lineRenderer: {fileID: 2655897688062882686}
-  meshCollider: {fileID: -3683226629696328292}
-  mesh: {fileID: 0}
+  hitParticle: {fileID: 1828096504273162532, guid: 4f93dfb7790237d4b9072d4e02136ab7,
+    type: 3}
+  cameraLazer: {fileID: 8336858713456320155, guid: 7f886afd1f60ca44a9a637cec1c2f539,
+    type: 3}
   targets: []
---- !u!64 &-3683226629696328292
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2655897688062882685}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
