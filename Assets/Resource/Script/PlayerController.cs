@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     RocketLauncher rocketLauncher;
     public ParticleSystem haze;
     public GameObject laze;
+    public GameObject obj = null;
     bool Rpressed = false;
     void Start()
     {
@@ -67,17 +68,18 @@ public class PlayerController : MonoBehaviour
         }
         if ((Input.GetKeyDown(KeyCode.R)) && !Rpressed)
         {
-            spawnlaze();
+           if (this.obj == null) this.obj = Instantiate(laze, lazePoint.position, lazePoint.rotation);
+        }
+        else if(Input.GetKeyUp(KeyCode.R))
+        {
+            if (this.obj != null) { Destroy(this.obj);
+                this.obj = null;
+            }
         }
        
            
         
-        void spawnlaze()
-        {
-            GameObject a= Instantiate(laze, lazePoint.position, lazePoint.rotation).gameObject;
-            Destroy(a);
-        }
-
+        
 
     }
     void FixedUpdate()
