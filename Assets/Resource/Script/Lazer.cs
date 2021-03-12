@@ -15,12 +15,13 @@ public class Lazer : MonoBehaviour
     public ParticleSystem hitParticle;
     bool partilceOnce = false;
     int length;
-  
-    
+    GameObject closettarget;
+
+
     public GameObject[] targets;
     float thisDistance;
     // Start is called before the first frame update
-    void Start()
+    void Start()    
     {
         lineRenderer = lineRenderer.GetComponent<LineRenderer>();
         meshCollider = gameObject.AddComponent<MeshCollider>();
@@ -30,71 +31,68 @@ public class Lazer : MonoBehaviour
         lineRenderer.BakeMesh(mesh, true);
         meshCollider.sharedMesh = mesh;
 
-
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-       
-
-        LauncherLaze = GameObject.FindWithTag("LauncherLaze").transform;
-       
-
-        lineRenderer.SetPosition(0, LauncherLaze.position);
-
-        targets = GameObject.FindGameObjectsWithTag("Enemy");
-        if(targets.Length == 0)
+        closettarget = this.findTarget();
+        if (closettarget == null)
         {
-            lineRenderer.SetPosition(1, LauncherLaze.transform.up * 500);
-            return;
+            Destroy(this.gameObject);
         }
-   if(targets.Length >= 1)
-        {   
-            GameObject closettarget = targets[0];
+    }
+    GameObject findTarget()
+    {
+        GameObject closettarget = null;
+        targets = GameObject.FindGameObjectsWithTag("Enemy");
+        if (targets.Length >= 1)
+        {
+            closettarget = targets[0];
             float closetDistance = Vector3.Distance(transform.position, closettarget.transform.position);
 
             for (int i = 1; i < targets.Length; i++)
             {
-                thisDistance = Vector3.Distance(transform.position, targets[i].transform.position);
-                if (thisDistance < closetDistance)
+                float thisDistance = Vector3.Distance(transform.position, targets[i].transform.position);
+                if (thisDistance < closetDistance || closettarget == this.closettarget)
                 {
                     closettarget = targets[i];
                     closetDistance = thisDistance;
-
-
                 }
             }
-            
-    
-            RaycastHit hit;
-            if (Physics.Raycast(LauncherLaze.position, transform.forward, out hit))
-            {
-                if (hit.collider)
-                {
-         
-                    lineRenderer.SetPosition(1,closettarget.transform.position);
-                   
-                    closettarget.GetComponent<Mover>().run(0f);
-                    
-                    if (!partilceOnce)
-                    {
-                        particleHitActive = Instantiate(hitParticle, closettarget.transform.position, closettarget.transform.rotation);
-                        
-                        partilceOnce = true;
-                    }
-                    Destroy(closettarget, 0.5f);
-                    Destroy(gameObject, 0.5f);
-                    Destroy(particleHitActive, 0.5f);
-                }
-            }
-            else
-                lineRenderer.SetPosition(1, transform.up* 500);
         }
-       
-       
+        return closettarget;
+    }
 
+    void Update()
+    {
+        LauncherLaze = GameObject.FindWithTag("LauncherLaze").transform;
 
+        if (closettarget == null)
+        {
+            lineRenderer.SetPosition(1, LauncherLaze.transform.up * 500);
+            return;
+        }
+
+        lineRenderer.SetPosition(0, LauncherLaze.position);
+        RaycastHit hit;
+        if (Physics.Raycast(LauncherLaze.position, transform.forward, out hit))
+        {
+            if (hit.collider)
+            {
+
+                lineRenderer.SetPosition(1, closettarget.transform.position);
+
+                closettarget.GetComponent<Mover>().run(0f);
+
+                if (!partilceOnce)
+                {
+                    particleHitActive = Instantiate(hitParticle, closettarget.transform.position, closettarget.transform.rotation);
+
+                    partilceOnce = true;
+                }
+                Debug.Log("Destroy");
+                Destroy(closettarget, 0.5f);
+                Destroy(gameObject, 0.5f);
+                Destroy(particleHitActive, 0.5f);
+            }
+        }
+        else
+            lineRenderer.SetPosition(1, transform.up * 500);
     }
 }
