@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2655897688062882687}
   - component: {fileID: 2655897688062882686}
-  - component: {fileID: 2655897688062882672}
+  - component: {fileID: 8134477212620888947}
   m_Layer: 0
   m_Name: laze
   m_TagString: Untagged
@@ -73,7 +73,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 1000, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -129,7 +129,7 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!114 &2655897688062882672
+--- !u!114 &8134477212620888947
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,12 +141,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49262922b6dfbf342a49d0d5abc75855, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lazerWith: 0.01
-  maxlength: 20
-  color: {r: 0.8490566, g: 0.2979556, b: 0, a: 1}
+  lazerWith: 1
+  maxlength: 100000
+  color: {r: 0, g: 0, b: 1, a: 1}
   lineRenderer: {fileID: 2655897688062882686}
   hitParticle: {fileID: 1828096504273162532, guid: 4f93dfb7790237d4b9072d4e02136ab7,
-    type: 3}
-  cameraLazer: {fileID: 8336858713456320155, guid: 7f886afd1f60ca44a9a637cec1c2f539,
     type: 3}
   targets: []

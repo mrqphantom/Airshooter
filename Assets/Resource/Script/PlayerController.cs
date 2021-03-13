@@ -21,16 +21,18 @@ public class PlayerController : MonoBehaviour
     private float nextFire;
     public float fireRocketRate;
     private float nextRocket;
-    public Light light;
+    public GameObject light_point;
     public GameObject muzzle1, muzzle2;
-    public GameObject rocket;
-    RocketLauncher rocketLauncher;
     public ParticleSystem haze;
+    public GameObject rocket, lazeStartParticle;
+    RocketLauncher rocketLauncher;
     public GameObject laze;
-    GameObject obj = null;
+    GameObject objLaze = null;
+    GameObject objParticleLaze = null;
     bool Rpressed = false;
     void Start()
     {
+        light_point.SetActive(false);
         muzzle1.SetActive(false);
         muzzle2.SetActive(false);
         rigid = GetComponent<Rigidbody>();
@@ -41,21 +43,24 @@ public class PlayerController : MonoBehaviour
     {
         if ((Input.GetKey(KeyCode.Space)) && Time.time > nextFire)
         {
-            muzzle1.SetActive(true);
-            muzzle2.SetActive(true);
+            StartCoroutine(waitMuzzle());
             nextFire = Time.time + fireRate;
             Instantiate(bullet, firePoint1.position, firePoint1.rotation);
             Instantiate(bullet, firePoint2.position, firePoint2.rotation);
-            Instantiate(light, lightpoint.position, lightpoint.rotation);
-
-
-
+            light_point.SetActive(true);
+            light_point.GetComponent<Light>().color = Color.yellow;
+           
         }
-        else
+      
+    
+        else if(Input.GetKeyUp(KeyCode.Space))
         {
+            light_point.SetActive(false);
             muzzle1.SetActive(false);
             muzzle2.SetActive(false);
         }
+
+        
         if (Input.GetKey(KeyCode.E) && Time.time > nextRocket)
         {
             nextRocket = Time.time + fireRocketRate;
@@ -63,8 +68,23 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.Q))
         {
+            light_point.SetActive(true);
+            light_point.GetComponent<Light>().color = Color.red;
             Instantiate(haze, hazePoint.position, hazePoint.rotation);
 
+        }
+        else if(Input.GetKeyUp(KeyCode.Q))
+        {
+            light_point.SetActive(false);
+        }
+        if (Input.GetKey(KeyCode.R))
+        {
+
+            light_point.SetActive(true);
+            light_point.GetComponent<Light>().color = Color.cyan;
+            this.objParticleLaze = Instantiate(lazeStartParticle, lazePoint.position, lazePoint.rotation);
+            this.objParticleLaze.transform.parent = this.transform;
+            Destroy(this.objParticleLaze,0.2f);
         }
         if ((Input.GetKeyDown(KeyCode.R)) && !Rpressed)
         {
@@ -72,19 +92,23 @@ public class PlayerController : MonoBehaviour
         }
         else if (Input.GetKeyUp(KeyCode.R))
         {
+            light_point.SetActive(false);
             Rpressed = false;
-            if (this.obj != null)
+            if (this.objLaze != null)
             {
-                Destroy(this.obj);
-                this.obj = null;
+                
+                Destroy(this.objLaze);
+                this.objLaze = null;
+               
             }
 
         }
-        if (Rpressed && this.obj == null)
+        if (Rpressed && this.objLaze == null)
         {
-            Debug.Log("create obj");
-            this.obj = Instantiate(laze, lazePoint.position, lazePoint.rotation);
+            this.objLaze = Instantiate(laze, lazePoint.position, transform.rotation);
+            this.objLaze.transform.parent = this.transform;
         }
+       
     }
     void FixedUpdate()
     {
@@ -98,6 +122,18 @@ public class PlayerController : MonoBehaviour
             0.0f
             );
         rigid.rotation = Quaternion.Euler(90f, rigid.velocity.x * -tilt, 180f);
+
+    }
+    IEnumerator waitMuzzle()
+    {
+
+        muzzle1.SetActive(true);
+        muzzle2.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        muzzle1.SetActive(false);
+        muzzle2.SetActive(false);
+        yield return new WaitForSeconds(0.2f);
+
 
     }
 

@@ -9,11 +9,11 @@ public class Lazer : MonoBehaviour
     public Color color = Color.blue;
     public LineRenderer lineRenderer;
     Transform LauncherLaze;
-    MeshCollider meshCollider;
-    Mesh mesh;
+    
+  
     ParticleSystem particleHitActive;
     public ParticleSystem hitParticle;
-    bool partilceOnce = false;
+    
     int length;
     GameObject closettarget;
 
@@ -21,22 +21,23 @@ public class Lazer : MonoBehaviour
     public GameObject[] targets;
     float thisDistance;
     // Start is called before the first frame update
-    void Start()    
+    void Start()
     {
+        LauncherLaze = GameObject.FindWithTag("LauncherLaze").transform;
+        lineRenderer.SetPosition(0, LauncherLaze.position);
         lineRenderer = lineRenderer.GetComponent<LineRenderer>();
-        meshCollider = gameObject.AddComponent<MeshCollider>();
-
-
-        Mesh mesh = new Mesh();
-        lineRenderer.BakeMesh(mesh, true);
-        meshCollider.sharedMesh = mesh;
-
+       
+        LauncherLaze = GameObject.FindWithTag("LauncherLaze").transform;
         closettarget = this.findTarget();
         if (closettarget == null)
         {
             Destroy(this.gameObject);
         }
-    }
+       
+        lineRenderer.SetPosition(1, new Vector3(0, 50, 0));
+    
+}
+  
     GameObject findTarget()
     {
         GameObject closettarget = null;
@@ -61,38 +62,31 @@ public class Lazer : MonoBehaviour
 
     void Update()
     {
-        LauncherLaze = GameObject.FindWithTag("LauncherLaze").transform;
+        lineRenderer.SetPosition(0, LauncherLaze.position);
 
         if (closettarget == null)
         {
-            lineRenderer.SetPosition(1, LauncherLaze.transform.up * 500);
+            lineRenderer.SetPosition(1, new Vector3(0, 50, 0));
             return;
         }
 
-        lineRenderer.SetPosition(0, LauncherLaze.position);
+       
+        lineRenderer.SetPosition(1, closettarget.transform.position);
         RaycastHit hit;
-        if (Physics.Raycast(LauncherLaze.position, transform.forward, out hit))
+        if (Physics.Raycast(LauncherLaze.position,transform.forward, out hit))
         {
             if (hit.collider)
             {
-
-                lineRenderer.SetPosition(1, closettarget.transform.position);
-
                 closettarget.GetComponent<Mover>().run(0f);
-
-                if (!partilceOnce)
-                {
-                    particleHitActive = Instantiate(hitParticle, closettarget.transform.position, closettarget.transform.rotation);
-
-                    partilceOnce = true;
-                }
-                Debug.Log("Destroy");
-                Destroy(closettarget, 0.5f);
-                Destroy(gameObject, 0.5f);
+                closettarget.GetComponent<DestroybyContact>().DestroyObject();
+                Destroy(gameObject,0.75f);
                 Destroy(particleHitActive, 0.5f);
             }
         }
         else
-            lineRenderer.SetPosition(1, transform.up * 500);
+        {
+            lineRenderer.SetPosition(1,new Vector3(0,1000,0));
+        }
+     
     }
 }

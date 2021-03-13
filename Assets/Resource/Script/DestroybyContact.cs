@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class DestroybyContact : MonoBehaviour
 {
-    public GameObject explosion, playerExplosion, player;
+    public GameObject explosion, playerExplosion, player, hitParticle;
+  
+    GameObject lazeparticle;
+    bool Onetime = false;
     
 
     void Start()
@@ -32,7 +35,7 @@ public class DestroybyContact : MonoBehaviour
 
              if (other.CompareTag("Player"))
             {
-            
+
             StartCoroutine(DelayExplosion());
             
             return;
@@ -49,6 +52,31 @@ public class DestroybyContact : MonoBehaviour
         Destroy(gameObject);
         
        
+    } 
+    public void DestroyObject()
+    {
+        if (!Onetime)
+        {
+            lazeparticle = Instantiate(hitParticle, this.transform.position, this.transform.rotation);
+            if (this.gameObject != null)
+            {
+                lazeparticle.transform.parent = this.transform;
+            }
+            StartCoroutine(PatilceDelay());
+            Onetime = true;
+        }
+        Destroy(this.gameObject,0.5f);
+        
+    
+        
     }
+   IEnumerator PatilceDelay()
+    {
+        
+        yield return new WaitForSeconds(0.4f);
+        Instantiate(explosion, this.transform.position, this.transform.rotation);
+        Debug.Log("nhan dame");
+    }
+ 
     }
 

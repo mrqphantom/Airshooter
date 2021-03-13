@@ -9593,6 +9593,8 @@ MonoBehaviour:
   playerExplosion: {fileID: 1418490148302035325, guid: e86c6138d1be7bc4fb0c9457a1813a3d,
     type: 3}
   player: {fileID: 0}
+  hitParticle: {fileID: 7974291237051548846, guid: 4f93dfb7790237d4b9072d4e02136ab7,
+    type: 3}
 --- !u!114 &8643110978623971874
 MonoBehaviour:
   m_ObjectHideFlags: 0
