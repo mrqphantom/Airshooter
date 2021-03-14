@@ -11,11 +11,17 @@ public class GameController : MonoBehaviour
     public float startWave;
     public float waitBomb;
     public GameObject player;
+    public float timeStartGame;
+    public Transform StartPoint;
+    public float StartSpeed;
+    public GameObject startParticle;
+    GameObject obj;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(spawnWave());
+        StartCoroutine(WaitGameStart());
     }
 
     // Update is called once per frame
@@ -38,5 +44,25 @@ public class GameController : MonoBehaviour
         }
 
 
+    }
+    IEnumerator WaitGameStart()
+    {
+      
+        StartCoroutine(player.AddComponent<StartmoveAnimation>().MoveOverSpeed(StartPoint.position, StartSpeed));
+        float t = 0;
+        while(t<timeStartGame)
+        {
+            t += Time.deltaTime;
+            player.GetComponent<PlayerController>().enabled = false;
+            obj = Instantiate(startParticle, player.transform.position, player.transform.rotation);
+            obj.transform.parent = player.transform;
+            Destroy(obj,1f);
+            yield return new WaitForEndOfFrame();
+            
+            
+        }
+        player.GetComponent<PlayerController>().enabled = true;
+        Destroy(obj,0.5f);
+        player.GetComponent<StartmoveAnimation>().enabled = false;
     }
 }

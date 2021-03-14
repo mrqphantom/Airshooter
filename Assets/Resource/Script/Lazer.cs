@@ -6,7 +6,6 @@ public class Lazer : MonoBehaviour
 {
     public float lazerWith = 1f;
     public float maxlength = 50f;
-    public Color color = Color.blue;
     public LineRenderer lineRenderer;
     Transform LauncherLaze;
     
@@ -26,11 +25,13 @@ public class Lazer : MonoBehaviour
         LauncherLaze = GameObject.FindWithTag("LauncherLaze").transform;
         lineRenderer.SetPosition(0, LauncherLaze.position);
         lineRenderer = lineRenderer.GetComponent<LineRenderer>();
-       
+        lineRenderer.startWidth = lazerWith;
+        lineRenderer.endWidth = lazerWith/2;
         LauncherLaze = GameObject.FindWithTag("LauncherLaze").transform;
         closettarget = this.findTarget();
         if (closettarget == null)
         {
+            lineRenderer.startWidth = lazerWith/3;
             Destroy(this.gameObject);
         }
        

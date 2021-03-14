@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
             Instantiate(bullet, firePoint1.position, firePoint1.rotation);
             Instantiate(bullet, firePoint2.position, firePoint2.rotation);
             light_point.SetActive(true);
-            light_point.GetComponent<Light>().color = Color.yellow;
+            light_point.GetComponent<Light>().color = Color.red;
            
         }
       
