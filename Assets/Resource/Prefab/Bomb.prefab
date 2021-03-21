@@ -9588,6 +9588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75961fc9d92a30448a8b4eaa002f5b60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 30
   explosion: {fileID: 9104729261587473013, guid: 3d21fb63b20fe5b4ab5f29ccdd1b3a2f,
     type: 3}
   playerExplosion: {fileID: 1418490148302035325, guid: e86c6138d1be7bc4fb0c9457a1813a3d,

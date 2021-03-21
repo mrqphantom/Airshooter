@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -16,6 +18,8 @@ public class GameController : MonoBehaviour
     public float StartSpeed;
     public GameObject startParticle;
     GameObject obj;
+    GameUI GameUI;
+    public int points;
     // Start is called before the first frame update
     void Start()
     {
@@ -65,4 +69,5 @@ public class GameController : MonoBehaviour
         Destroy(obj,0.5f);
         player.GetComponent<StartmoveAnimation>().enabled = false;
     }
+  
 }

@@ -1,58 +1,77 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class DestroybyContact : MonoBehaviour
 {
+    public int health=10;
     public GameObject explosion, playerExplosion, player, hitParticle;
-  
+    GameUI gameUI;
     GameObject lazeparticle;
     bool Onetime = false;
+    PlayerController playerController;
+    Infor infor;
     
 
     void Start()
     {
+        
         player = GameObject.FindWithTag("Player");
+        
     }
 
         // Update is called once per frame
         void Update()
         {
-        
-        }
+            if(health<=0)
+            {
+            StartCoroutine(Death(0));
+            }
+
+          }
          void OnParticleCollision(GameObject other)
          {
-             Instantiate(explosion, transform.position, transform.rotation);
-        Destroy(gameObject);
-         }
+          Destroy(other.gameObject);
+          DamageTaken(FindObjectOfType<Infor>().damagePlayerHaze);
+          ;
+          }
 
 
-    void OnTriggerEnter(Collider other)
-        {
+        void OnTriggerEnter(Collider other)
+         {
             if (other.CompareTag("Boundary"))
-            { return; }
-        Instantiate(explosion, transform.position, transform.rotation);
-
-             if (other.CompareTag("Player"))
             {
+            return; }
 
-            StartCoroutine(DelayExplosion());
-            
+            if (other.CompareTag("Player"))
+            {
+            FindObjectOfType<PlayerController>().takeDamage(FindObjectOfType<Infor>().damageBomb);
+            StartCoroutine(Death(0));
+
             return;
             }
-            
+            if(other.CompareTag("Bullet"))
+            {
+               
+                Destroy(other.gameObject);
+                DamageTaken(FindObjectOfType<Infor>().damageBullet);
+               
+             }
+            if(other.CompareTag("Rocket"))
+             {
             Destroy(other.gameObject);
-            Destroy(gameObject);
+            DamageTaken(FindObjectOfType<Infor>().damagePlayerRocket);
+              }
+
         }
-      IEnumerator DelayExplosion()
-    {
-        yield return new WaitForSeconds(0.02f);
-        Destroy(player);
-        Instantiate(playerExplosion, player.transform.position, player.transform.rotation);
-        Destroy(gameObject);
+            
         
+   
        
-    } 
+   
     public void DestroyObject()
     {
         if (!Onetime)
@@ -62,21 +81,26 @@ public class DestroybyContact : MonoBehaviour
             {
                 lazeparticle.transform.parent = this.transform;
             }
-            StartCoroutine(PatilceDelay());
             Onetime = true;
         }
-        Destroy(this.gameObject,0.5f);
+
+        DamageTaken(FindObjectOfType<Infor>().damagePlayerLaze);
         
     
         
     }
-   IEnumerator PatilceDelay()
+   IEnumerator Death(float delay)
     {
-        
-        yield return new WaitForSeconds(0.4f);
+        FindObjectOfType<GameUI>().ScoreIncrease();
         Instantiate(explosion, this.transform.position, this.transform.rotation);
-        Debug.Log("nhan dame");
+        Destroy(gameObject,delay);
+        yield return new WaitForSeconds(0.4f);
+        
     }
- 
+    public void DamageTaken(int damage)
+    {
+        health -= damage; 
+    }
+    
     }
 

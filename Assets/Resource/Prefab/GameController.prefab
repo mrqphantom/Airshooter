@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8858475808884549131
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8858475808884549129}
+  - component: {fileID: 8858475808884549130}
+  - component: {fileID: 8858475808884549128}
+  m_Layer: 0
+  m_Name: GameController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8858475808884549129
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8858475808884549131}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.013414467, y: 0.9552252, z: -0.009400001}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8858475808884549130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8858475808884549131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 295808aabff644c4692c534dd03ad199, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bomb: {fileID: 7051996054864494242, guid: 2f994f64daeaf464aa3c1b60bf515627, type: 3}
+  spawnValues: {x: 0, y: 1.614, z: 0}
+  waitWave: 1
+  bombCount: 20
+  startWave: 0.4
+  waitBomb: 0.85
+  player: {fileID: 0}
+  timeStartGame: 0.55
+  StartPoint: {fileID: 0}
+  StartSpeed: 4
+  startParticle: {fileID: 6364501053072725780, guid: c4dd3edb42d0dd14bb748743eeba2394,
+    type: 3}
+  points: 0
+--- !u!114 &8858475808884549128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8858475808884549131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d2fa89808dba1243920434f289a88c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageBomb: 10
+  damagePlayerRocket: 15
+  damagePlayerLaze: 1
+  damagePlayerHaze: 3
+  damageBullet: 3

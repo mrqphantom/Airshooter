@@ -10,7 +10,7 @@ public class Boundary
 
 }
 public class PlayerController : MonoBehaviour
-{
+{   public int health = 100;
     public Boundary boundary;
     public float speed = 0.5f;
     public float tilt;
@@ -30,6 +30,9 @@ public class PlayerController : MonoBehaviour
     GameObject objLaze = null;
     GameObject objParticleLaze = null;
     bool Rpressed = false;
+    public ParticleSystem playerExplosion;
+
+
     void Start()
     {
         light_point.SetActive(false);
@@ -81,7 +84,7 @@ public class PlayerController : MonoBehaviour
         {
 
             light_point.SetActive(true);
-            light_point.GetComponent<Light>().color = Color.cyan;
+            light_point.GetComponent<Light>().color = Color.red;
             this.objParticleLaze = Instantiate(lazeStartParticle, lazePoint.position, lazePoint.rotation);
             this.objParticleLaze.transform.parent = this.transform;
             Destroy(this.objParticleLaze,0.2f);
@@ -108,6 +111,10 @@ public class PlayerController : MonoBehaviour
             this.objLaze = Instantiate(laze, lazePoint.position, transform.rotation);
             this.objLaze.transform.parent = this.transform;
         }
+        if(health<=0)
+        {
+            StartCoroutine(Death());
+        }
        
     }
     void FixedUpdate()
@@ -133,6 +140,19 @@ public class PlayerController : MonoBehaviour
         muzzle1.SetActive(false);
         muzzle2.SetActive(false);
         yield return new WaitForSeconds(0.2f);
+
+
+    }
+    public void takeDamage(int damage)
+    {
+        health -= damage;
+    }
+    IEnumerator Death()
+    {
+        
+        yield return new WaitForSeconds(0.02f);
+        Instantiate(playerExplosion, transform.position, transform.rotation);
+        Destroy(gameObject);
 
 
     }

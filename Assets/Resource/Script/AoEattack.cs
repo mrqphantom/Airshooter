@@ -29,7 +29,7 @@ public class AoEattack : MonoBehaviour
                 if (nearbyEnemy.tag == ("Enemy") && (nearbyEnemy != null))
                 {
                     Instantiate(explosion2, nearbyEnemy.transform.position, transform.rotation);
-                    Debug.Log("Chamroi");
+                    
                 }
             }
             

@@ -8,6 +8,9 @@ TagManager:
   - Enemy
   - Launcher
   - LauncherLaze
+  - GameUI
+  - Bullet
+  - Rocket
   layers:
   - Default
   - TransparentFX

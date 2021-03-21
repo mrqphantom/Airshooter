@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-1193917190201965310
+--- !u!114 &-603967039594395833
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,9 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: laze
-  m_Shader: {fileID: -6465566751694194690, guid: 8716ce0b2f22e5846a422365b7463773,
-    type: 3}
+  m_Name: New Material 2
+  m_Shader: {fileID: 4800000, guid: b9dcbeabfbc33824991e115f3dfd108b, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -33,20 +32,12 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_4448C1C4:
-        m_Texture: {fileID: 2800000, guid: 1759520a62600aa4eb2e7a100a9f37d0, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Texture2D_5BB69DC4:
-        m_Texture: {fileID: 2800000, guid: d4179c2d8348e2743b4673a77c90d2df, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Texture2D_5E4D9F0:
-        m_Texture: {fileID: 2800000, guid: d13856ffebf25bd4aa19ea7d0e5c5c98, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Bubble:
+        m_Texture: {fileID: 2800000, guid: 14e6c9ef2ad9e1246ad85e1b31454784, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -73,13 +64,31 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _TextureInside:
+        m_Texture: {fileID: 2800000, guid: 36e7b7df94b46ed4da20af04da6e948c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _WaterColor:
+        m_Texture: {fileID: 2800000, guid: 26c3b3959c61cc5438ba199150a2e4d5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _WaterLevel:
+        m_Texture: {fileID: 2800000, guid: efc27c14ce034c646a14edcee1190a04, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Wave:
+        m_Texture: {fileID: 2800000, guid: a38392873d7aedd47be4267bc5ec4e17, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_4A251639: 0.81
-    - Vector1_582CFCD7: 30
-    - Vector1_5ECEDB31: 0.1
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
+    - _ColorMask: 15
     - _Cull: 2
     - _Cutoff: 0.5
     - _DstBlend: 0
@@ -95,11 +104,17 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
     - _Surface: 0
+    - _UseUIAlphaClip: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
+    - _progressing_control: 1
     m_Colors:
-    - Color_F28EF104: {r: 23.113773, g: 0.45265695, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
