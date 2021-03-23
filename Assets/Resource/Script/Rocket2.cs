@@ -13,6 +13,8 @@ public class Rocket2 : MonoBehaviour
     public GameObject Explosion;
     float thisDistance;
     public GameObject Dir;
+    public ParticleSystem hitRocketPartilce;
+    ParticleSystem Obj;
    
     // Start is called before the first frame update
     void Start()
@@ -59,6 +61,13 @@ public class Rocket2 : MonoBehaviour
 
         }
 
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            Obj = Instantiate(hitRocketPartilce, other.gameObject.transform.position, other.gameObject.transform.rotation);
+        }
     }
 }
 

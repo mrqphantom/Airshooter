@@ -220,6 +220,8 @@ MonoBehaviour:
   Explosion: {fileID: 9104729261587473013, guid: 3d21fb63b20fe5b4ab5f29ccdd1b3a2f,
     type: 3}
   Dir: {fileID: 0}
+  hitRocketPartilce: {fileID: 7484557484552842021, guid: f1a25ba3f5706e042be01916f160d5db,
+    type: 3}
 --- !u!1001 &8258845062491008722
 PrefabInstance:
   m_ObjectHideFlags: 0

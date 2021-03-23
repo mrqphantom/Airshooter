@@ -126,6 +126,8 @@ MonoBehaviour:
   speed: 2.5
   rigid: {fileID: 0}
   lifeTime: 2
+  hitPartilce: {fileID: 6953659866083677642, guid: 214a2b753b0db3d4994dc172c6b50458,
+    type: 3}
 --- !u!54 &1602967184766890373
 Rigidbody:
   m_ObjectHideFlags: 0

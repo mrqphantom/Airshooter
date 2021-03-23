@@ -80,7 +80,7 @@ public class Lazer : MonoBehaviour
             {
                 closettarget.GetComponent<Mover>().run(0f);
                 closettarget.GetComponent<DestroybyContact>().DestroyObject();
-                Destroy(gameObject,0.75f);
+                Destroy(gameObject,0.35f);
                 Destroy(particleHitActive, 0.5f);
             }
         }
