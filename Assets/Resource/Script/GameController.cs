@@ -20,6 +20,8 @@ public class GameController : MonoBehaviour
     GameObject obj;
     GameUI GameUI;
     public int points;
+    public Collider player_impact;
+    public Collider enemy_impact;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +29,7 @@ public class GameController : MonoBehaviour
         StartCoroutine(spawnWave());
         StartCoroutine(WaitGameStart());
     }
+  
 
     // Update is called once per frame
     
@@ -69,5 +72,7 @@ public class GameController : MonoBehaviour
         Destroy(obj,0.5f);
         player.GetComponent<StartmoveAnimation>().enabled = false;
     }
+  
+    
   
 }

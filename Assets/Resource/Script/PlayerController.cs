@@ -31,6 +31,12 @@ public class PlayerController : MonoBehaviour
     GameObject objParticleLaze = null;
     bool Rpressed = false;
     public ParticleSystem playerExplosion;
+    public float TimeFreeze;
+    public GameObject stun;
+    GameObject stunObj;
+    bool Onetime = false;
+    ShakeCamera shakeCamera;
+    
 
 
     void Start()
@@ -44,6 +50,7 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
+       
         if ((Input.GetKey(KeyCode.Space)) && Time.time > nextFire)
         {
             StartCoroutine(waitMuzzle());
@@ -71,6 +78,7 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.Q))
         {
+       
             light_point.SetActive(true);
             light_point.GetComponent<Light>().color = Color.red;
             Instantiate(haze, hazePoint.position, hazePoint.rotation);
@@ -155,6 +163,34 @@ public class PlayerController : MonoBehaviour
         Destroy(gameObject);
 
 
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            GameObject.Find("Main Camera").AddComponent<ShakeCamera>().shakeDuration = 20f;
+            GameObject.Find("Main Camera").AddComponent<ShakeCamera>().shakeAmount = 1f;
+            GameObject.Find("Main Camera").AddComponent<ShakeCamera>().decreaseFactor = 10f;
+            StartCoroutine(OnCollisionWithObstacle());
+        }
+    }
+    public IEnumerator OnCollisionWithObstacle()
+    {
+        if (!Onetime)
+        {
+            stunObj = Instantiate(stun, transform.position, transform.rotation);
+            stunObj.transform.parent = transform;
+            Onetime = true;
+          
+        }
+     
+        speed /= 3;
+        fireRate *= 2;
+        yield return new WaitForSeconds(1f);
+        speed *= 3;
+        fireRate /= 2;
+        Destroy(stunObj);
+        Onetime = false;
     }
 
 }

@@ -8,14 +8,16 @@ using UnityEngine.SceneManagement;
 public class DestroybyContact : MonoBehaviour
 {
     public int health=10;
-    public GameObject explosion, playerExplosion, player, hitParticle,hazeHitParticle;
+    public GameObject explosion, playerExplosion, player, hitParticle,hazeHitParticle,playerHit;
     GameUI gameUI;
     GameObject lazeparticle,hazeHit;
     bool Onetime = false;
     PlayerController playerController;
     Infor infor;
-    
-    
+    GameObject obj;
+  
+
+
 
     void Start()
     {
@@ -52,11 +54,14 @@ public class DestroybyContact : MonoBehaviour
 
             if (other.CompareTag("Player"))
             {
+          
+            obj = Instantiate(playerHit, other.gameObject.transform.position, other.gameObject.transform.rotation);
+            obj.transform.parent = other.gameObject.transform;
             FindObjectOfType<PlayerController>().takeDamage(FindObjectOfType<Infor>().damageBomb);
             StartCoroutine(Death(0));
-
             return;
             }
+            
             if(other.CompareTag("Bullet"))
             {
                 pullback(80f, gameObject.transform.position);

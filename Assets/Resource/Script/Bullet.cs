@@ -36,7 +36,7 @@ public class Bullet : MonoBehaviour
         {
            
             
-                other.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * 1000f * Time.deltaTime);
+               
                 Obj = Instantiate(hitPartilce, other.gameObject.transform.position, other.gameObject.transform.rotation);
                 Obj.transform.parent = other.gameObject.transform;
           

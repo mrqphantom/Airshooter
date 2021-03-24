@@ -236,6 +236,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6110608520073126683, guid: 14f96382ec5e00b428d4980c52052cda,
         type: 3}
+      propertyPath: stun
+      value: 
+      objectReference: {fileID: 4070702879994858480, guid: d9a0fffb235272c4482b3d23c2dd01a0,
+        type: 3}
+    - target: {fileID: 6110608520073126683, guid: 14f96382ec5e00b428d4980c52052cda,
+        type: 3}
+      propertyPath: TimeFreeze
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6110608520073126683, guid: 14f96382ec5e00b428d4980c52052cda,
+        type: 3}
       propertyPath: lightpoint
       value: 
       objectReference: {fileID: 0}
