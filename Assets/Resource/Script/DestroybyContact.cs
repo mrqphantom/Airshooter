@@ -8,12 +8,13 @@ using UnityEngine.SceneManagement;
 public class DestroybyContact : MonoBehaviour
 {
     public int health=10;
-    public GameObject explosion, playerExplosion, player, hitParticle;
+    public GameObject explosion, playerExplosion, player, hitParticle,hazeHitParticle;
     GameUI gameUI;
-    GameObject lazeparticle;
+    GameObject lazeparticle,hazeHit;
     bool Onetime = false;
     PlayerController playerController;
     Infor infor;
+    
     
 
     void Start()
@@ -34,9 +35,12 @@ public class DestroybyContact : MonoBehaviour
           }
          void OnParticleCollision(GameObject other)
          {
+           
+          hazeHit = Instantiate(hazeHitParticle,transform.position,transform.rotation);
+          hazeHit.transform.parent = gameObject.transform;
           Destroy(other.gameObject);
           DamageTaken(FindObjectOfType<Infor>().damagePlayerHaze);
-          ;
+          
           }
 
 
@@ -55,15 +59,14 @@ public class DestroybyContact : MonoBehaviour
             }
             if(other.CompareTag("Bullet"))
             {
-               
+                pullback(80f, gameObject.transform.position);
                 Destroy(other.gameObject);
                 DamageTaken(FindObjectOfType<Infor>().damageBullet);
-               
              }
             if(other.CompareTag("Rocket"))
              {
-            Destroy(other.gameObject);
-            DamageTaken(FindObjectOfType<Infor>().damagePlayerRocket);
+                 Destroy(other.gameObject);
+                 DamageTaken(FindObjectOfType<Infor>().damagePlayerRocket);
               }
 
         }
@@ -101,6 +104,11 @@ public class DestroybyContact : MonoBehaviour
     {
         health -= damage; 
     }
-    
+    void pullback(float pullpower, Vector3 pulldir)
+    {
+        gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+        gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, pulldir.y *pullpower, 0));
     }
+
+}
 

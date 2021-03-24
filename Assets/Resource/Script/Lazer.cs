@@ -8,16 +8,15 @@ public class Lazer : MonoBehaviour
     public float maxlength = 50f;
     public LineRenderer lineRenderer;
     Transform LauncherLaze;
-    
-  
+
+
     ParticleSystem particleHitActive;
     public ParticleSystem hitParticle;
-    
+
     int length;
     GameObject closettarget;
+    List<GameObject> targets;
 
-
-    public GameObject[] targets;
     float thisDistance;
     // Start is called before the first frame update
     void Start()
@@ -26,23 +25,76 @@ public class Lazer : MonoBehaviour
         lineRenderer.SetPosition(0, LauncherLaze.position);
         lineRenderer = lineRenderer.GetComponent<LineRenderer>();
         lineRenderer.startWidth = lazerWith;
-        lineRenderer.endWidth = lazerWith/2;
+        lineRenderer.endWidth = lazerWith / 2;
         LauncherLaze = GameObject.FindWithTag("LauncherLaze").transform;
-        closettarget = this.findTarget();
-        if (closettarget == null)
+
+        this.targets = this.FindTargets(5, 0);
+        if (this.targets.Count == 0)
         {
-            lineRenderer.startWidth = lazerWith/3;
+            lineRenderer.startWidth = lazerWith / 3;
             Destroy(this.gameObject);
+        } else
+        {
+            foreach (var m in this.targets)
+            {
+                m.GetComponent<Mover>().run(0f);
+                m.GetComponent<DestroybyContact>().DestroyObject();
+            }
+            Destroy(gameObject, 0.35f);
+            Destroy(particleHitActive, 0.5f);
         }
-       
+
+        //closettarget = this.findTarget();
+        //if (closettarget == null)
+        //{
+        //    lineRenderer.startWidth = lazerWith / 3;
+        //    Destroy(this.gameObject);
+        //}
+
         lineRenderer.SetPosition(1, new Vector3(0, 50, 0));
-    
-}
-  
+
+    }
+
+    List<GameObject> FindTargets(int count, float view)
+    {
+        var r = new List<GameObject>();
+        var p = transform.position;
+        var targets = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
+        for (var i = 0; i < count; i++)
+        {
+            var target = this.FindTarget(p, view, targets);
+            if (target == null)
+            {
+                break;
+            }
+            r.Add(target);
+            targets.Remove(target);
+            p = target.transform.position;
+        }
+        return r;
+    }
+
+    GameObject FindTarget(Vector3 pos, float view, List<GameObject> targets)
+    {
+        var r = (GameObject)null;
+        var min = float.MaxValue;
+        foreach (var m in targets)
+        {
+            var v = m.transform.position - pos;
+            var d = Vector3.Distance(pos, m.transform.position);
+            if (d < min)
+            {
+                r = m;
+                min = d;
+            }
+        }
+        return r;
+    }
+
     GameObject findTarget()
     {
         GameObject closettarget = null;
-        targets = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject[] targets = GameObject.FindGameObjectsWithTag("Enemy");
         if (targets.Length >= 1)
         {
             closettarget = targets[0];
@@ -65,29 +117,33 @@ public class Lazer : MonoBehaviour
     {
         lineRenderer.SetPosition(0, LauncherLaze.position);
 
-        if (closettarget == null)
+        if (this.targets.Count == 0)
         {
             lineRenderer.SetPosition(1, new Vector3(0, 50, 0));
             return;
         }
 
-       
-        lineRenderer.SetPosition(1, closettarget.transform.position);
-        RaycastHit hit;
-        if (Physics.Raycast(LauncherLaze.position,transform.forward, out hit))
+        for (var i = 0; i < this.targets.Count; i++) 
         {
-            if (hit.collider)
-            {
-                closettarget.GetComponent<Mover>().run(0f);
-                closettarget.GetComponent<DestroybyContact>().DestroyObject();
-                Destroy(gameObject,0.35f);
-                Destroy(particleHitActive, 0.5f);
-            }
+            lineRenderer.SetPosition(i + 1, this.targets[i].transform.position);
         }
-        else
-        {
-            lineRenderer.SetPosition(1,new Vector3(0,1000,0));
-        }
-     
+        //Destroy(gameObject, 0.35f);
+        //Destroy(particleHitActive, 0.5f);
+        //RaycastHit hit;
+        //if (Physics.Raycast(LauncherLaze.position, transform.forward, out hit))
+        //{
+        //    if (hit.collider)
+        //    {
+        //        closettarget.GetComponent<Mover>().run(0f);
+        //        closettarget.GetComponent<DestroybyContact>().DestroyObject();
+        //        Destroy(gameObject, 0.35f);
+        //        Destroy(particleHitActive, 0.5f);
+        //    }
+        //}
+        //else
+        //{
+        //    lineRenderer.SetPosition(1, new Vector3(0, 1000, 0));
+        //}
+
     }
 }

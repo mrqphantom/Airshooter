@@ -9596,6 +9596,8 @@ MonoBehaviour:
   player: {fileID: 0}
   hitParticle: {fileID: 7974291237051548846, guid: 4f93dfb7790237d4b9072d4e02136ab7,
     type: 3}
+  hazeHitParticle: {fileID: 6294830075934275696, guid: 837dab53a21c138478ea795257a6d3ea,
+    type: 3}
 --- !u!114 &8643110978623971874
 MonoBehaviour:
   m_ObjectHideFlags: 0
