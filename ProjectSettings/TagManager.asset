@@ -11,6 +11,8 @@ TagManager:
   - GameUI
   - Bullet
   - Rocket
+  - Fire
+  - Shield
   layers:
   - Default
   - TransparentFX

@@ -67,6 +67,7 @@ public class Rocket2 : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             Obj = Instantiate(hitRocketPartilce, other.gameObject.transform.position, other.gameObject.transform.rotation);
+            Obj.transform.position = Vector3.MoveTowards(Obj.transform.position ,other.transform.position,0.5f);
         }
     }
 }

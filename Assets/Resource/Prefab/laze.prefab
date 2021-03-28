@@ -142,7 +142,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lazerWith: 0.03
-  maxlength: 100000
+  maxlength: 1
   lineRenderer: {fileID: 2655897688062882686}
   hitParticle: {fileID: 1828096504273162532, guid: 4f93dfb7790237d4b9072d4e02136ab7,
     type: 3}
+  range: 0.1

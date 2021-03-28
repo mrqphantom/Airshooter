@@ -22,9 +22,13 @@ public class GameController : MonoBehaviour
     public int points;
     public Collider player_impact;
     public Collider enemy_impact;
+    public GameObject shield;
+    GameObject shield_Obj;
     // Start is called before the first frame update
     void Start()
     {
+        shield_Obj = Instantiate(shield, player.transform.position, player.transform.rotation);
+        shield_Obj.transform.parent = player.transform;
         player = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(spawnWave());
         StartCoroutine(WaitGameStart());

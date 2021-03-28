@@ -16,6 +16,7 @@ public class Lazer : MonoBehaviour
     int length;
     GameObject closettarget;
     List<GameObject> targets;
+    public float range;
 
     float thisDistance;
     // Start is called before the first frame update
@@ -40,7 +41,7 @@ public class Lazer : MonoBehaviour
             Destroy(gameObject, 0.35f);
             Destroy(particleHitActive, 0.5f);
         }
-        lineRenderer.SetPosition(1, new Vector3(0, 50, 0));
+        lineRenderer.SetPosition(1, new Vector3(0, 10, 0));
 
     }
 
@@ -66,7 +67,7 @@ public class Lazer : MonoBehaviour
     GameObject FindTarget(Vector3 pos, float view, List<GameObject> targets)
     {
         var r = (GameObject)null;
-        var min = float.MaxValue;
+        var min = 0.55f;
         foreach (var m in targets)
         {
             var v = m.transform.position - pos;
@@ -88,10 +89,14 @@ public class Lazer : MonoBehaviour
         {
             closettarget = targets[0];
             float closetDistance = Vector3.Distance(transform.position, closettarget.transform.position);
-
+            if (closetDistance>=range)
+            {
+                closetDistance = range;
+            }
             for (int i = 1; i < targets.Length; i++)
             {
                 float thisDistance = Vector3.Distance(transform.position, targets[i].transform.position);
+            
                 if (thisDistance < closetDistance || closettarget == this.closettarget)
                 {
                     closettarget = targets[i];
@@ -108,7 +113,7 @@ public class Lazer : MonoBehaviour
 
         if (this.targets.Count == 0)
         {
-            lineRenderer.SetPosition(1, new Vector3(0, 50, 0));
+            lineRenderer.SetPosition(1, new Vector3(0, 10, 0));
             return;
         }
         var p = new List<Vector3>();

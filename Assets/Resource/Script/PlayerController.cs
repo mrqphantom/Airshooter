@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     public GameObject light_point;
     public GameObject muzzle1, muzzle2;
     public ParticleSystem haze;
-    public GameObject rocket, lazeStartParticle;
+    public GameObject rocket, lazeStartParticle,smoke;
     RocketLauncher rocketLauncher;
     public GameObject laze;
     GameObject objLaze = null;
@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem playerExplosion;
     public float TimeFreeze;
     public GameObject stun;
-    GameObject stunObj;
+    GameObject stunObj,obj;
     bool Onetime = false;
     ShakeCamera shakeCamera;
     
@@ -50,7 +50,15 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-       
+       if(health<=30)
+        {if (!Onetime)
+            {
+                obj = Instantiate(smoke, transform.position, Quaternion.identity);
+                obj.transform.parent = transform;
+                Onetime = true;
+            }
+            StartCoroutine(LowHealth());
+        }
         if ((Input.GetKey(KeyCode.Space)) && Time.time > nextFire)
         {
             StartCoroutine(waitMuzzle());
@@ -193,4 +201,17 @@ public class PlayerController : MonoBehaviour
         Onetime = false;
     }
 
+    IEnumerator LowHealth()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(0.2f);
+            light_point.GetComponent<Light>().color = Color.red;
+            light_point.GetComponent<Light>().intensity = 0.35f;
+            light_point.SetActive(true);
+            yield return new WaitForSeconds(0.4f);
+            light_point.SetActive(false);
+
+        }
+    }
 }

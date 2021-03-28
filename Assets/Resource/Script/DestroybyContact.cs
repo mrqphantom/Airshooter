@@ -15,7 +15,10 @@ public class DestroybyContact : MonoBehaviour
     PlayerController playerController;
     Infor infor;
     GameObject obj;
-  
+    public GameObject HitShield;
+
+
+
 
 
 
@@ -35,15 +38,26 @@ public class DestroybyContact : MonoBehaviour
             }
 
           }
-         void OnParticleCollision(GameObject other)
+        void OnParticleCollision(GameObject other)
          {
+        if (other.CompareTag("Fire"))
+            {
            
-          hazeHit = Instantiate(hazeHitParticle,transform.position,transform.rotation);
-          hazeHit.transform.parent = gameObject.transform;
-          Destroy(other.gameObject);
-          DamageTaken(FindObjectOfType<Infor>().damagePlayerHaze);
-          
-          }
+            hazeHit = Instantiate(hazeHitParticle, transform.position, transform.rotation);
+            hazeHit.transform.parent = gameObject.transform;
+            Destroy(other.gameObject);
+            DamageTaken(FindObjectOfType<Infor>().damagePlayerHaze);
+            StartCoroutine(SlowdownEnemy());
+            }
+        if (other.CompareTag("Shield"))
+        {
+            Instantiate(HitShield,transform.position, Quaternion.identity);
+            health = 0;
+        }
+      
+        }
+
+
 
 
         void OnTriggerEnter(Collider other)
@@ -113,6 +127,19 @@ public class DestroybyContact : MonoBehaviour
     {
         gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
         gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, pulldir.y *pullpower, 0));
+    }
+    public IEnumerator SlowdownEnemy()
+    {
+
+        yield return new WaitForSeconds(0.3f);
+        gameObject.GetComponent<Turnable_obj>().tumb /= 3;
+        gameObject.GetComponent<Mover>().speed /= 1.2f;
+       
+        yield return new WaitForSeconds(0.3f);
+        gameObject.GetComponent<Turnable_obj>().tumb *= 3;
+        gameObject.GetComponent<Mover>().speed *= 1.2f;
+
+        yield return new WaitForSeconds(2f);
     }
 
 }

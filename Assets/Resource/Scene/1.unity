@@ -242,6 +242,12 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 6110608520073126683, guid: 14f96382ec5e00b428d4980c52052cda,
         type: 3}
+      propertyPath: smoke
+      value: 
+      objectReference: {fileID: 5203788068094213884, guid: b8c368890abad5e44aeca80bbdb43a5b,
+        type: 3}
+    - target: {fileID: 6110608520073126683, guid: 14f96382ec5e00b428d4980c52052cda,
+        type: 3}
       propertyPath: TimeFreeze
       value: 2
       objectReference: {fileID: 0}
@@ -398,6 +404,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &409756154 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6110608520073126684, guid: 14f96382ec5e00b428d4980c52052cda,
+    type: 3}
+  m_PrefabInstance: {fileID: 318234223}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &502298583
 GameObject:
   m_ObjectHideFlags: 0
@@ -1386,6 +1398,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8858475808884549130, guid: a2150d8f660dca34694ad7f9a49a8103,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 409756154}
+    - target: {fileID: 8858475808884549130, guid: a2150d8f660dca34694ad7f9a49a8103,
+        type: 3}
+      propertyPath: shield
+      value: 
+      objectReference: {fileID: 426364171004008584, guid: 184bb896c03f27c42b938ae09306c9b2,
+        type: 3}
     - target: {fileID: 8858475808884549130, guid: a2150d8f660dca34694ad7f9a49a8103,
         type: 3}
       propertyPath: StartPoint
