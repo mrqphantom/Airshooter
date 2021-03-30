@@ -10,7 +10,8 @@ public class Boundary
 
 }
 public class PlayerController : MonoBehaviour
-{   public int health = 100;
+{   public int maxhealth = 100;
+    public int currentHeath;
     public Boundary boundary;
     public float speed = 0.5f;
     public float tilt;
@@ -36,11 +37,14 @@ public class PlayerController : MonoBehaviour
     GameObject stunObj,obj;
     bool Onetime = false;
     ShakeCamera shakeCamera;
+    public HealthBar healthBar;
     
 
 
     void Start()
     {
+        currentHeath = maxhealth;
+        healthBar.Setmaxhealth(maxhealth);
         light_point.SetActive(false);
         muzzle1.SetActive(false);
         muzzle2.SetActive(false);
@@ -50,7 +54,7 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-       if(health<=30)
+       if(currentHeath<=30)
         {if (!Onetime)
             {
                 obj = Instantiate(smoke, transform.position, Quaternion.identity);
@@ -84,9 +88,9 @@ public class PlayerController : MonoBehaviour
             nextRocket = Time.time + fireRocketRate;
             StartCoroutine(rocketLauncher.launchRocket());
         }
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKey(KeyCode.Q)&& Time.time>nextFire)
         {
-       
+            nextFire = Time.time + 0.025f;
             light_point.SetActive(true);
             light_point.GetComponent<Light>().color = Color.red;
             Instantiate(haze, hazePoint.position, hazePoint.rotation);
@@ -122,12 +126,13 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-        if (Rpressed && this.objLaze == null)
+        if (Rpressed && this.objLaze == null&& Time.time>nextFire)
         {
+            nextFire = Time.time + 1f;
             this.objLaze = Instantiate(laze, lazePoint.position, transform.rotation);
             this.objLaze.transform.parent = this.transform;
         }
-        if(health<=0)
+        if(currentHeath<=0)
         {
             StartCoroutine(Death());
         }
@@ -161,7 +166,8 @@ public class PlayerController : MonoBehaviour
     }
     public void takeDamage(int damage)
     {
-        health -= damage;
+        currentHeath -= damage;
+        healthBar.setHealth(currentHeath);
     }
     IEnumerator Death()
     {
