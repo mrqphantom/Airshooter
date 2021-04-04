@@ -3,8 +3,13 @@ guid: 5dde35cabcdd6d84e916c4a7b1cfebc3
 ShaderImporter:
   externalObjects: {}
   defaultTextures:
+  - _Diffuse2: {fileID: 2800000, guid: 84508b93f15f2b64386ec07486afc7a3, type: 3}
   - _Diffuse: {fileID: 2800000, guid: 84508b93f15f2b64386ec07486afc7a3, type: 3}
   - _ToonRamp: {fileID: 2800000, guid: 52e66a9243cdfed44b5e906f5910d35b, type: 3}
+  - _Texture0: {fileID: 2800000, guid: 3ffd2b7703024a84db2b36e7bceaacac, type: 3}
+  - _Emissive2: {fileID: 2800000, guid: 4f6593d9c9d9edb4ba522a2422a02a84, type: 3}
+  - _Emissive: {fileID: 2800000, guid: 30cc33cfa90935c4ebfbf4815fa97db1, type: 3}
+  - _DisolveGuide: {fileID: 2800000, guid: 36e7b7df94b46ed4da20af04da6e948c, type: 3}
   nonModifiableTextures: []
   userData: 
   assetBundleName: 

@@ -13,6 +13,7 @@ TagManager:
   - Rocket
   - Fire
   - Shield
+  - HealthUI
   layers:
   - Default
   - TransparentFX

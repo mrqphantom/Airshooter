@@ -16,7 +16,8 @@ public class DestroybyContact : MonoBehaviour
     Infor infor;
     GameObject obj;
     public GameObject HitShield;
-
+    PlayerShader playerShader;
+ 
 
 
 
@@ -24,15 +25,16 @@ public class DestroybyContact : MonoBehaviour
 
     void Start()
     {
-        
+       
         player = GameObject.FindWithTag("Player");
         
     }
 
         // Update is called once per frame
         void Update()
-        {
-            if(health<=0)
+    {
+ 
+        if (health<=0)
             {
             StartCoroutine(Death(0));
             }
@@ -68,11 +70,12 @@ public class DestroybyContact : MonoBehaviour
 
             if (other.CompareTag("Player"))
             {
-          
+           
             obj = Instantiate(playerHit, other.gameObject.transform.position, other.gameObject.transform.rotation);
             obj.transform.parent = other.gameObject.transform;
             FindObjectOfType<PlayerController>().takeDamage(FindObjectOfType<Infor>().damageBomb);
-            StartCoroutine(Death(0));
+            StartCoroutine(Death(0f));
+           
             return;
             }
             
@@ -111,7 +114,7 @@ public class DestroybyContact : MonoBehaviour
     
         
     }
-   IEnumerator Death(float delay)
+   public IEnumerator Death(float delay)
     {
         FindObjectOfType<GameUI>().ScoreIncrease();
         Instantiate(explosion, this.transform.position, this.transform.rotation);
@@ -141,6 +144,7 @@ public class DestroybyContact : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
     }
+
 
 }
 

@@ -44,12 +44,40 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _BurnRamp:
+        m_Texture: {fileID: 2800000, guid: 36be8d528a4fa024faa4680d7658642c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BurnRamp1:
+        m_Texture: {fileID: 2800000, guid: 64e7766099ad46747a07014e44d0aea1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Diffuse:
-        m_Texture: {fileID: 2800000, guid: 84508b93f15f2b64386ec07486afc7a3, type: 3}
+        m_Texture: {fileID: 2800000, guid: 625bae1c3c2bb6f48aeaa1d11991c7d1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Diffuse2:
+        m_Texture: {fileID: 2800000, guid: d8ca229c8c6cbf24b927a21aeb5aba30, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DisolveGuide:
+        m_Texture: {fileID: 2800000, guid: cd460ee4ac5c1e746b7a734cc7cc64dd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DisolveGuide1:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Emissive:
+        m_Texture: {fileID: 2800000, guid: 30cc33cfa90935c4ebfbf4815fa97db1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Emissive2:
+        m_Texture: {fileID: 2800000, guid: 4f6593d9c9d9edb4ba522a2422a02a84, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Highlight:
@@ -65,7 +93,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 41adc7325ddb7a8488fba50659583b95, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalMap2:
+        m_Texture: {fileID: 2800000, guid: daf2816de2e8b004c9292a355736c7c5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -74,6 +106,18 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture0:
+        m_Texture: {fileID: 2800000, guid: 3ffd2b7703024a84db2b36e7bceaacac, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample0:
+        m_Texture: {fileID: 2800000, guid: 3ffd2b7703024a84db2b36e7bceaacac, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample1:
+        m_Texture: {fileID: 2800000, guid: 30cc33cfa90935c4ebfbf4815fa97db1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ToonRamp:
@@ -93,23 +137,29 @@ Material:
     - _BumpScale: 1
     - _Cull: 2
     - _Cutoff: 0.5
+    - _DissolveAmount: 0.02
+    - _DissolveAmount1: 0.44
     - _DstBlend: 0
     - _EnvironmentReflections: 1
+    - _Float0: 0
+    - _Float1: 0.26
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _HighlightCellOffset: -0.888
     - _HighlightCellSharpness: 0.539
+    - _Hit: 0
     - _IndirectDiffuseContribution: 0.795
     - _IndirectSpecularContribution: 1
+    - _Low_health: 0
     - _Metallic: 0
     - _NormalScale: 0.173
     - _OcclusionStrength: 1
     - _OutlineWidth: 0.02
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _RimOffset: -1.09
-    - _RimPower: 6.27
+    - _RimOffset: -0.78
+    - _RimPower: 7.03
     - _ShadowContribution: 0.829
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0

@@ -20,21 +20,64 @@ public class GameController : MonoBehaviour
     GameObject obj;
     GameUI GameUI;
     public int points;
-    public Collider player_impact;
-    public Collider enemy_impact;
     public GameObject shield;
     GameObject shield_Obj;
-    // Start is called before the first frame update
-    void Start()
-    {
-        shield_Obj = Instantiate(shield, player.transform.position, player.transform.rotation);
-        shield_Obj.transform.parent = player.transform;
-        player = GameObject.FindGameObjectWithTag("Player");
-        StartCoroutine(spawnWave());
-        StartCoroutine(WaitGameStart());
-    }
+    float range=0.01f;
+    PlayerShader playerShader;
+    DestroybyContact destroybyContact;
+    public GameObject health;
+    public GameObject[] enemy;
   
 
+    // Start is called before the first frame update
+    void Start()
+
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+        if (player)
+        {
+            shield_Obj = Instantiate(shield, player.transform.position, player.transform.rotation);
+            shield_Obj.transform.parent = player.transform;
+            StartCoroutine(spawnWave());
+            StartCoroutine(WaitGameStart());
+            StartCoroutine(Dissolve());
+        }
+    
+    }
+  
+    void Update()
+    {
+        enemy = GameObject.FindGameObjectsWithTag("Enemy");
+        if (!health)
+        {if(enemy.Length==0)
+            {
+                return;
+            }
+          
+            {if (enemy.Length != 0)
+                {
+                    for (int i = 1; i < enemy.Length; i++)
+                    {
+                      StartCoroutine( enemy[i].GetComponent<DestroybyContact>().Death(0f));  
+                    }
+                    bombCount = 1;
+                }
+            }
+        }
+        if (shield_Obj)
+        {if (health)
+            {
+                FindObjectOfType<HealthShader>().material.SetFloat("_Shield", 1);
+                FindObjectOfType<HealthShader>().material.SetFloat("_Hit", 0);
+            }
+        }
+        else if(!shield_Obj)
+        {if (health)
+            {
+                FindObjectOfType<HealthShader>().material.SetFloat("_Shield", 0);
+            }
+        }
+    }
     // Update is called once per frame
     
     IEnumerator spawnWave()
@@ -77,6 +120,13 @@ public class GameController : MonoBehaviour
         player.GetComponent<StartmoveAnimation>().enabled = false;
     }
   
-    
+    public IEnumerator Dissolve()
+    {
+        for (int i=0;i<100;i++)
+        {
+            FindObjectOfType<PlayerShader>().material.SetFloat("_DissolveAmount", range+=0.01f);
+            yield return new WaitForSeconds(0.02f);
+        }
+    }
   
 }

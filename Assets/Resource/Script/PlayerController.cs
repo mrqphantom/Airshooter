@@ -38,7 +38,9 @@ public class PlayerController : MonoBehaviour
     bool Onetime = false;
     ShakeCamera shakeCamera;
     public HealthBar healthBar;
-    
+    HealthShader healthShader;
+
+
 
 
     void Start()
@@ -54,6 +56,7 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
+  
        if(currentHeath<=30)
         {if (!Onetime)
             {
@@ -182,6 +185,8 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
+            StartCoroutine(Hit());
+            StartCoroutine(HitHealthBar());
             GameObject.Find("Main Camera").AddComponent<ShakeCamera>().shakeDuration = 20f;
             GameObject.Find("Main Camera").AddComponent<ShakeCamera>().shakeAmount = 1f;
             GameObject.Find("Main Camera").AddComponent<ShakeCamera>().decreaseFactor = 10f;
@@ -211,13 +216,29 @@ public class PlayerController : MonoBehaviour
     {
         while(true)
         {
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.65f);
             light_point.GetComponent<Light>().color = Color.red;
             light_point.GetComponent<Light>().intensity = 0.35f;
             light_point.SetActive(true);
-            yield return new WaitForSeconds(0.4f);
+            yield return new WaitForSeconds(0.3f);
             light_point.SetActive(false);
 
         }
+    }
+    public IEnumerator Hit()
+    {
+        
+        FindObjectOfType<PlayerShader>().material.SetFloat("_Hit", 1f);
+        yield return new WaitForSeconds(0.75f);
+       FindObjectOfType<PlayerShader>().material.SetFloat("_Hit", 0f);
+        yield return new WaitForSeconds(0.1f);
+
+    }
+    public IEnumerator HitHealthBar()
+    {
+        FindObjectOfType<HealthShader>().material.SetFloat("_Hit", 1f);
+        yield return new WaitForSeconds(0.05f);
+        FindObjectOfType<HealthShader>().material.SetFloat("_Hit", 0f);
+
     }
 }
