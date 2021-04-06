@@ -39,11 +39,12 @@ public class PlayerController : MonoBehaviour
     ShakeCamera shakeCamera;
     public HealthBar healthBar;
     HealthShader healthShader;
+    public float currentvalue;
 
 
 
 
-    void Start()
+     void Start()
     {
         currentHeath = maxhealth;
         healthBar.Setmaxhealth(maxhealth);
@@ -168,8 +169,11 @@ public class PlayerController : MonoBehaviour
 
     }
     public void takeDamage(int damage)
+
     {
+        
         currentHeath -= damage;
+    
         healthBar.setHealth(currentHeath);
     }
     IEnumerator Death()

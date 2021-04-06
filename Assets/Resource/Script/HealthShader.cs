@@ -25,10 +25,8 @@ public class HealthShader : MonoBehaviour
         float currentHealth = FindObjectOfType<PlayerController>().currentHeath;
         float maxHealth = FindObjectOfType<PlayerController>().maxhealth;
         range = currentHealth / maxHealth;
-     
-     
         material.SetFloat("_progressing_control", range);
-        if(range==0)
+        if (range==0)
         {
             Destroy(gameObject);
         }
@@ -37,4 +35,5 @@ public class HealthShader : MonoBehaviour
 
     
     }
+ 
 }
