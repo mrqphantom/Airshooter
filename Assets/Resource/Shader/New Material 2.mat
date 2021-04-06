@@ -125,7 +125,7 @@ Material:
     - _UseUIAlphaClip: 1
     - _WorkflowMode: 1
     - _ZWrite: 1
-    - _progressing_control: 1
+    - _progressing_control: 0.373
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
