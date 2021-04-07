@@ -6633,6 +6633,12 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 8858475808884549130, guid: a2150d8f660dca34694ad7f9a49a8103,
         type: 3}
+      propertyPath: SpeedUp
+      value: 
+      objectReference: {fileID: 5766876021111650692, guid: 87d36dbfc1d174f4eb595267e82d8b52,
+        type: 3}
+    - target: {fileID: 8858475808884549130, guid: a2150d8f660dca34694ad7f9a49a8103,
+        type: 3}
       propertyPath: startWave
       value: 0.65
       objectReference: {fileID: 0}

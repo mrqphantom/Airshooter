@@ -14,6 +14,7 @@ TagManager:
   - Fire
   - Shield
   - HealthUI
+  - Item
   layers:
   - Default
   - TransparentFX
