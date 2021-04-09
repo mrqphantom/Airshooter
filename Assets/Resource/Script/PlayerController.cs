@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     private float nextFire;
     public float fireRocketRate;
     private float nextRocket;
-    public GameObject light_point;
+    public GameObject light_point,particle_trail1,particle_trail2;
     public GameObject muzzle1, muzzle2;
     public ParticleSystem haze;
     public GameObject rocket, lazeStartParticle, smoke, ParticleSpeed,SpeedUpHitParticle
@@ -258,8 +258,15 @@ public class PlayerController : MonoBehaviour
     }
     public IEnumerator SpeedUp()
     {
-       
-            Vector3 tranformObj = new Vector3(transform.position.x, transform.position.y,0.04f);
+            ParticleSystem Ps1 = particle_trail1.GetComponent<ParticleSystem>();
+            ParticleSystem Ps2= particle_trail2.GetComponent<ParticleSystem>();
+            var main1 = Ps1.main;
+            var main2 = Ps2.main;
+            main1.startColor = Color.cyan;
+            main1.startSpeed = 2.35f;
+            main2.startColor = Color.cyan;
+            main2.startSpeed = 2.35f;
+        Vector3 tranformObj = new Vector3(transform.position.x, transform.position.y,0.04f);
             FindObjectOfType<PlayerShader>().material.SetFloat("_SpeedUp", 1);
             obj = Instantiate(ParticleSpeed, tranformObj, transform.rotation);
             obj.transform.parent = transform;
@@ -267,6 +274,7 @@ public class PlayerController : MonoBehaviour
             Onetime = false;
       
         yield return new WaitForSeconds(5f);
+        ResetTrail();
         FindObjectOfType<PlayerShader>().material.SetFloat("_SpeedUp",0);
         speed = speed / 1.5f;
         Destroy(obj);
@@ -277,5 +285,18 @@ public class PlayerController : MonoBehaviour
         FindObjectOfType<PlayerShader>().material.SetFloat("_SpeedUpHit", 1);
         yield return new WaitForSeconds(0.35f);
         FindObjectOfType<PlayerShader>().material.SetFloat("_SpeedUpHit", 0);
+    }
+    void ResetTrail()
+    {
+        ParticleSystem Ps1 = particle_trail1.GetComponent<ParticleSystem>();
+        ParticleSystem Ps2 = particle_trail2.GetComponent<ParticleSystem>();
+        var main1 = Ps1.main;
+        var main2 = Ps2.main;
+        main1.startColor = Color.white;
+        main1.startSpeed = Random.Range(0.6f, 1f);
+        main2.startColor = Color.white;
+        main2.startSpeed = 2;
+        main2.startSpeed = Random.Range(0.6f, 1f);
+
     }
 }

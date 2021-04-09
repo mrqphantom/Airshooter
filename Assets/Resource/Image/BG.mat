@@ -124,6 +124,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - SpeedBackground: 12.531462
+    - Vector1_A78C36BC: 0
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ATDistance: 1
@@ -247,6 +249,7 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
+    - SpeedBackground: {r: 0, g: 0.1, b: 0, a: 0}
     - Vector2_3DB6B722: {r: 0, g: 0.22, b: 0, a: 0}
     - Vector2_7287DD1B: {r: 0, g: 2, b: 0, a: 0}
     - Vector2_A36D67D8: {r: 0, g: 0.1, b: 0, a: 0}

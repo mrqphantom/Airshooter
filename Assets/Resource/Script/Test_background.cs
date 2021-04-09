@@ -6,24 +6,28 @@ public class Test_background : MonoBehaviour
 {
     public Material Materialspeed;
     public float speedBackground;
-    public GameObject SpeedUpPartilce;
+    PlayerController playerController;
     
     
     // Start is called before the first frame update
     void Start()
     {
-        
-        Materialspeed.SetVector("Vector2_7287DD1B", new Vector2(0, speedBackground));
-
+        playerController = FindObjectOfType<PlayerController>();
+  
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(SpeedUpPartilce)
+        speedBackground +=Time.deltaTime/10;
+        if (playerController.speed>25)
         {
-            Materialspeed.SetVector("Vector2_7287DD1B", new Vector2(0, 2f));
-
+            
+            Materialspeed.SetFloat("SpeedBackground", speedBackground+=Time.deltaTime/5);
+        }
+        else
+        {
+            Materialspeed.SetFloat("SpeedBackground", speedBackground);
         }
     }
 }

@@ -164,6 +164,8 @@ Material:
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
+    - _SpeedUp: 0
+    - _SpeedUpHit: 0
     - _SrcBlend: 1
     - _StaticHighLights: 0
     - _Surface: 0

@@ -96,7 +96,7 @@ public class GameController : MonoBehaviour
 
         {
             for (int i = 0; i < bombCount; i++)
-            {
+            { 
                 Vector3 spawnPosition = new Vector3(Random.Range(-0.217f, 0.318f), spawnValues.y, -0.0094f);
                 Quaternion spawnRotation = new Quaternion();
                 Instantiate(bomb, spawnPosition, spawnRotation);
@@ -114,7 +114,7 @@ public class GameController : MonoBehaviour
         StartCoroutine(player.AddComponent<StartmoveAnimation>().MoveOverSpeed(StartPoint.position, StartSpeed));
         float t = 0;
         while (t < timeStartGame)
-        {
+        {   FindObjectOfType<Test_background>().Materialspeed.SetFloat("SpeedBackground",Time.deltaTime / 3);
             t += Time.deltaTime;
             player.GetComponent<PlayerController>().enabled = false;
             obj = Instantiate(startParticle, player.transform.position, player.transform.rotation);
