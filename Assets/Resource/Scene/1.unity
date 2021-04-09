@@ -288,6 +288,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2677595024323426359, guid: e86c6138d1be7bc4fb0c9457a1813a3d,
         type: 3}
+    - target: {fileID: 6110608520073126683, guid: 14f96382ec5e00b428d4980c52052cda,
+        type: 3}
+      propertyPath: SpeedUpHitParticle
+      value: 
+      objectReference: {fileID: 455258411852950246, guid: a1b9d9039c8e9284ebb11e275af732d5,
+        type: 3}
     - target: {fileID: 6110608520073126684, guid: 14f96382ec5e00b428d4980c52052cda,
         type: 3}
       propertyPath: m_Name

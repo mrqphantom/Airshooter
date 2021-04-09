@@ -25,7 +25,8 @@ public class PlayerController : MonoBehaviour
     public GameObject light_point;
     public GameObject muzzle1, muzzle2;
     public ParticleSystem haze;
-    public GameObject rocket, lazeStartParticle, smoke, ParticleSpeed;
+    public GameObject rocket, lazeStartParticle, smoke, ParticleSpeed,SpeedUpHitParticle
+        ;
     RocketLauncher rocketLauncher;
     public GameObject laze;
     GameObject objLaze = null;
@@ -199,8 +200,11 @@ public class PlayerController : MonoBehaviour
         if(other.CompareTag("ItemSpeedUp"))
         {
             StartCoroutine(SpeedUp());
-          
+            StartCoroutine(SpeedUpHit());
+            Instantiate(SpeedUpHitParticle, other.gameObject.transform.position, other.gameObject.transform.rotation);
+            Destroy(other.gameObject);
 
+           
         }    
 
     }
@@ -254,16 +258,24 @@ public class PlayerController : MonoBehaviour
     }
     public IEnumerator SpeedUp()
     {
-        if (!Onetime)
-        {
-            speed = speed * 2;
+       
+            Vector3 tranformObj = new Vector3(transform.position.x, transform.position.y,0.04f);
+            FindObjectOfType<PlayerShader>().material.SetFloat("_SpeedUp", 1);
+            obj = Instantiate(ParticleSpeed, tranformObj, transform.rotation);
+            obj.transform.parent = transform;
+            speed = speed * 1.5f;
             Onetime = false;
-            speedObj = Instantiate(ParticleSpeed, transform.position, transform.rotation);
-            speedObj.transform.parent = this.transform;
-        }
+      
         yield return new WaitForSeconds(5f);
-        speed = speed / 2;
-        Destroy(speedObj);
+        FindObjectOfType<PlayerShader>().material.SetFloat("_SpeedUp",0);
+        speed = speed / 1.5f;
+        Destroy(obj);
 
+    }
+    public IEnumerator SpeedUpHit()
+    {
+        FindObjectOfType<PlayerShader>().material.SetFloat("_SpeedUpHit", 1);
+        yield return new WaitForSeconds(0.35f);
+        FindObjectOfType<PlayerShader>().material.SetFloat("_SpeedUpHit", 0);
     }
 }
