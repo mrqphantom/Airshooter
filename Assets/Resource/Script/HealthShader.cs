@@ -7,33 +7,51 @@ public class HealthShader : MonoBehaviour
     public Renderer meshRenderer;
     public Material material;
     public float range;
+
+    public float currentValue = -1;
+    public float targetValue = -1;
+
     PlayerController player;
     // Start is called before the first frame update
     void Start()
     {
         meshRenderer = gameObject.GetComponent<Renderer>();
         material = meshRenderer.material;
-    
-
-
     }
 
     // Update is called once per frame
     void Update()
-
     {
+        var dt = Time.deltaTime;
         float currentHealth = FindObjectOfType<PlayerController>().currentHeath;
         float maxHealth = FindObjectOfType<PlayerController>().maxhealth;
-        range = currentHealth / maxHealth;
-        material.SetFloat("_progressing_control", range);
-        if (range==0)
+        if (maxHealth == 0)
+        {
+            return;
+        }
+        var range = currentHealth / maxHealth;
+        if (this.currentValue <= 0)
+        {
+            this.currentValue = range;
+        }
+        if (range != this.currentValue)
+        {
+            this.targetValue = range;
+        }
+      
+        if (this.currentValue != this.targetValue && this.targetValue >= 0)
+        {
+            this.currentValue += (this.targetValue - this.currentValue) * dt / 0.1f;
+            if (this.currentValue < 0)
+            {
+                this.currentValue = 0;
+            }
+            this.material.SetFloat("_progressing_control", this.currentValue);
+        }
+        if (this.currentValue <= 0)
         {
             Destroy(gameObject);
         }
-
-      
-
-    
     }
  
 }
