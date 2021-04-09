@@ -623,8 +623,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8093743791020329799, guid: 2dbcd8b4ea1d0714a9e51c69045d87d0,
         type: 3}
+      propertyPath: SpeedUpPartilce
+      value: 
+      objectReference: {fileID: 7544001206451549057, guid: bb4a718bb33bb7b4bbe2a0fe4f45150b,
+        type: 3}
+    - target: {fileID: 8093743791020329799, guid: 2dbcd8b4ea1d0714a9e51c69045d87d0,
+        type: 3}
       propertyPath: speedBackground
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2dbcd8b4ea1d0714a9e51c69045d87d0, type: 3}
@@ -1725,6 +1731,12 @@ PrefabInstance:
       propertyPath: StartPoint
       value: 
       objectReference: {fileID: 966171106}
+    - target: {fileID: 8858475808884549130, guid: a2150d8f660dca34694ad7f9a49a8103,
+        type: 3}
+      propertyPath: SpeedUpPartilce
+      value: 
+      objectReference: {fileID: 7544001206451549057, guid: bb4a718bb33bb7b4bbe2a0fe4f45150b,
+        type: 3}
     - target: {fileID: 8858475808884549131, guid: a2150d8f660dca34694ad7f9a49a8103,
         type: 3}
       propertyPath: m_Name

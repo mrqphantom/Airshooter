@@ -28,6 +28,8 @@ public class GameController : MonoBehaviour
     public GameObject health;
     public GameObject[] enemy;
     public GameObject SpeedUp;
+ 
+    Test_background test_Background;
 
 
     // Start is called before the first frame update
@@ -49,8 +51,9 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
+        
         enemy = GameObject.FindGameObjectsWithTag("Enemy");
-        if (!health)
+        if (!player)
         {
             if (enemy.Length == 0)
             {
@@ -64,7 +67,7 @@ public class GameController : MonoBehaviour
                     {
                         StartCoroutine(enemy[i].GetComponent<DestroybyContact>().Death(0f));
                     }
-                    bombCount = 1;
+                    bombCount = 0;
                 }
             }
         }
