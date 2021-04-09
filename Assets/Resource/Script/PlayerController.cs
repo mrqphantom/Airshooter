@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     public GameObject light_point;
     public GameObject muzzle1, muzzle2;
     public ParticleSystem haze;
-    public GameObject rocket, lazeStartParticle, smoke, ParticleSpeed;
+    public GameObject rocket, lazeStartParticle,smoke;
     RocketLauncher rocketLauncher;
     public GameObject laze;
     GameObject objLaze = null;
@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem playerExplosion;
     public float TimeFreeze;
     public GameObject stun;
-    GameObject stunObj,obj,speedObj;
+    GameObject stunObj,obj;
     bool Onetime = false;
     ShakeCamera shakeCamera;
     public HealthBar healthBar;
@@ -196,13 +196,6 @@ public class PlayerController : MonoBehaviour
             GameObject.Find("Main Camera").AddComponent<ShakeCamera>().decreaseFactor = 10f;
             StartCoroutine(OnCollisionWithObstacle());
         }
-        if(other.CompareTag("ItemSpeedUp"))
-        {
-            StartCoroutine(SpeedUp());
-          
-
-        }    
-
     }
     public IEnumerator OnCollisionWithObstacle()
     {
@@ -250,20 +243,6 @@ public class PlayerController : MonoBehaviour
         FindObjectOfType<HealthShader>().material.SetFloat("_Hit", 1f);
         yield return new WaitForSeconds(0.05f);
         FindObjectOfType<HealthShader>().material.SetFloat("_Hit", 0f);
-
-    }
-    public IEnumerator SpeedUp()
-    {
-        if (!Onetime)
-        {
-            speed = speed * 2;
-            Onetime = false;
-            speedObj = Instantiate(ParticleSpeed, transform.position, transform.rotation);
-            speedObj.transform.parent = this.transform;
-        }
-        yield return new WaitForSeconds(5f);
-        speed = speed / 2;
-        Destroy(speedObj);
 
     }
 }
