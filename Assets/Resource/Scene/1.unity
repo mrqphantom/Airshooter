@@ -187,7 +187,7 @@ PrefabInstance:
     - target: {fileID: 6110608520073126680, guid: 14f96382ec5e00b428d4980c52052cda,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6110608520073126680, guid: 14f96382ec5e00b428d4980c52052cda,
         type: 3}
@@ -268,6 +268,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6110608520073126683, guid: 14f96382ec5e00b428d4980c52052cda,
         type: 3}
+      propertyPath: HitPartilce
+      value: 
+      objectReference: {fileID: 455258411852950246, guid: a1b9d9039c8e9284ebb11e275af732d5,
+        type: 3}
+    - target: {fileID: 6110608520073126683, guid: 14f96382ec5e00b428d4980c52052cda,
+        type: 3}
       propertyPath: light_point
       value: 
       objectReference: {fileID: 84398724}
@@ -281,6 +287,12 @@ PrefabInstance:
       propertyPath: ParticleSpeed
       value: 
       objectReference: {fileID: 7544001206451549057, guid: bb4a718bb33bb7b4bbe2a0fe4f45150b,
+        type: 3}
+    - target: {fileID: 6110608520073126683, guid: 14f96382ec5e00b428d4980c52052cda,
+        type: 3}
+      propertyPath: ShieldParticle
+      value: 
+      objectReference: {fileID: 426364171004008584, guid: 184bb896c03f27c42b938ae09306c9b2,
         type: 3}
     - target: {fileID: 6110608520073126683, guid: 14f96382ec5e00b428d4980c52052cda,
         type: 3}
@@ -449,7 +461,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &409756154 stripped
 GameObject:
@@ -1006,7 +1018,7 @@ Transform:
   m_LocalScale: {x: 0.8625, y: 1.4413844, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1527487559
 MonoBehaviour:
@@ -1223,7 +1235,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1945290948
 GameObject:
@@ -1609,7 +1621,7 @@ PrefabInstance:
     - target: {fileID: 4459772840179635163, guid: d7789c16866c21f4ca8ab0c680a656b7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4459772840179635163, guid: d7789c16866c21f4ca8ab0c680a656b7,
         type: 3}
@@ -1673,7 +1685,7 @@ PrefabInstance:
     - target: {fileID: 8858475808884549129, guid: a2150d8f660dca34694ad7f9a49a8103,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8858475808884549129, guid: a2150d8f660dca34694ad7f9a49a8103,
         type: 3}
@@ -1725,6 +1737,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8858475808884549130, guid: a2150d8f660dca34694ad7f9a49a8103,
+        type: 3}
+      propertyPath: Shield
+      value: 
+      objectReference: {fileID: 5726093298077379379, guid: b2d45e39a33b91e4cbeaaab76782206c,
+        type: 3}
     - target: {fileID: 8858475808884549130, guid: a2150d8f660dca34694ad7f9a49a8103,
         type: 3}
       propertyPath: health

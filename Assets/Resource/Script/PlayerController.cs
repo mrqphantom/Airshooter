@@ -25,8 +25,7 @@ public class PlayerController : MonoBehaviour
     public GameObject light_point,particle_trail1,particle_trail2;
     public GameObject muzzle1, muzzle2;
     public ParticleSystem haze;
-    public GameObject rocket, lazeStartParticle, smoke, ParticleSpeed,SpeedUpHitParticle
-        ;
+    public GameObject rocket, lazeStartParticle, smoke, ParticleSpeed,HitPartilce,ShieldParticle;
     RocketLauncher rocketLauncher;
     public GameObject laze;
     GameObject objLaze = null;
@@ -58,8 +57,22 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-  
-       if(currentHeath<=30)
+        if (ShieldParticle)
+        {
+           
+                FindObjectOfType<HealthShader>().material.SetFloat("_Shield", 1);
+                FindObjectOfType<HealthShader>().material.SetFloat("_Hit", 0);
+          
+        }
+        else if (!ShieldParticle)
+        {
+            
+           
+                FindObjectOfType<HealthShader>().material.SetFloat("_Shield", 0);
+            
+        }
+
+        if (currentHeath<=30)
         {if (!Onetime)
             {
                 obj = Instantiate(smoke, transform.position, Quaternion.identity);
@@ -201,11 +214,19 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(SpeedUp());
             StartCoroutine(SpeedUpHit());
-            Instantiate(SpeedUpHitParticle, other.gameObject.transform.position, other.gameObject.transform.rotation);
+            Instantiate(HitPartilce, other.gameObject.transform.position, other.gameObject.transform.rotation);
             Destroy(other.gameObject);
 
            
-        }    
+        }  
+        if(other.CompareTag("ItemShield"))
+        {
+            
+                ShieldUp();
+                Destroy(other.gameObject);
+                Instantiate(HitPartilce, other.gameObject.transform.position, other.gameObject.transform.rotation);
+            
+        }
 
     }
     public IEnumerator OnCollisionWithObstacle()
@@ -268,8 +289,8 @@ public class PlayerController : MonoBehaviour
             main2.startSpeed = 2.35f;
         Vector3 tranformObj = new Vector3(transform.position.x, transform.position.y,0.04f);
             FindObjectOfType<PlayerShader>().material.SetFloat("_SpeedUp", 1);
-            obj = Instantiate(ParticleSpeed, tranformObj, transform.rotation);
-            obj.transform.parent = transform;
+            speedObj = Instantiate(ParticleSpeed, tranformObj, transform.rotation);
+            speedObj.transform.parent = transform;
             speed = speed * 1.5f;
             Onetime = false;
       
@@ -277,7 +298,15 @@ public class PlayerController : MonoBehaviour
         ResetTrail();
         FindObjectOfType<PlayerShader>().material.SetFloat("_SpeedUp",0);
         speed = speed / 1.5f;
-        Destroy(obj);
+        Destroy(speedObj);
+
+    }
+    void ShieldUp()
+    {
+        obj = Instantiate(ShieldParticle, transform.position, transform.rotation);
+        obj.transform.parent = transform;
+
+
 
     }
     public IEnumerator SpeedUpHit()

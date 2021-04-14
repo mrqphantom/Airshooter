@@ -15,6 +15,7 @@ TagManager:
   - Shield
   - HealthUI
   - ItemSpeedUp
+  - ItemShield
   layers:
   - Default
   - TransparentFX
