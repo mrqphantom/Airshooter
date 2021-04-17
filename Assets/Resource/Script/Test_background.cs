@@ -5,7 +5,7 @@ using UnityEngine;
 public class Test_background : MonoBehaviour
 {
     public Material Materialspeed;
-    public float speedBackground;
+    public float speedBackground=0;
     PlayerController playerController;
     
     
@@ -19,15 +19,23 @@ public class Test_background : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        speedBackground +=Time.deltaTime/10;
-        if (playerController.speed>25)
+       
+        if (playerController.isSpeedUp==true)
         {
-            
-            Materialspeed.SetFloat("SpeedBackground", speedBackground+=Time.deltaTime/5);
+
+            SlowSpeed();
         }
-        else
+        else if(playerController.isSpeedUp==false)
         {
-            Materialspeed.SetFloat("SpeedBackground", speedBackground);
+            defaultSpeed();
         }
+    }
+    void defaultSpeed()
+    {
+        Materialspeed.SetFloat("SpeedBackground", speedBackground+=Time.deltaTime/7);
+    }
+    void SlowSpeed()
+    {
+        Materialspeed.SetFloat("SpeedBackground", speedBackground += Time.deltaTime / 15);
     }
 }

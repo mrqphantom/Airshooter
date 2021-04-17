@@ -14,6 +14,7 @@ public class Shield : MonoBehaviour
     Gradient gra;
     public List<ParticleCollisionEvent> collisionEvents;
     public GameObject HitShield;
+    HealthShader healthShader;
 
 
 
@@ -57,6 +58,7 @@ public class Shield : MonoBehaviour
        
         particleMain.loop = false;
         yield return new WaitForSeconds(2f);
+        FindObjectOfType<HealthShader>().material.SetFloat("_Shield", 0);
         Destroy(gameObject);
 
     }

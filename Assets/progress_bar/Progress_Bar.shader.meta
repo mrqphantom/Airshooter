@@ -3,11 +3,12 @@ guid: b9dcbeabfbc33824991e115f3dfd108b
 ShaderImporter:
   externalObjects: {}
   defaultTextures:
+  - _Texture0: {fileID: 2800000, guid: f3989d7d8be5c8647a2f51a4cae6d14b, type: 3}
+  - _WaterLevel: {fileID: 2800000, guid: efc27c14ce034c646a14edcee1190a04, type: 3}
   - _Wave: {fileID: 2800000, guid: a38392873d7aedd47be4267bc5ec4e17, type: 3}
+  - _TextureInside: {fileID: 2800000, guid: 36e7b7df94b46ed4da20af04da6e948c, type: 3}
   - _Bubble: {fileID: 2800000, guid: 14e6c9ef2ad9e1246ad85e1b31454784, type: 3}
   - _WaterColor: {fileID: 2800000, guid: 26c3b3959c61cc5438ba199150a2e4d5, type: 3}
-  - _WaterLevel: {fileID: 2800000, guid: efc27c14ce034c646a14edcee1190a04, type: 3}
-  - _TextureInside: {fileID: 2800000, guid: 36e7b7df94b46ed4da20af04da6e948c, type: 3}
   nonModifiableTextures: []
   userData: 
   assetBundleName: 

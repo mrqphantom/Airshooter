@@ -14,12 +14,14 @@ public class PlayerController : MonoBehaviour
     public int currentHeath;
     public Boundary boundary;
     public float speed = 0.5f;
+    public float defaultSpeed;
+    public bool isSpeedUp=false;
     public float tilt;
     public Rigidbody rigid;
     public GameObject bullet;
     public Transform firePoint1, firePoint2, lightpoint, hazePoint, lazePoint;
-    public float fireRate;
-    private float nextFire;
+    public float fireRate,timeSpeedUp=5f;
+    private float nextFire,nextSpeed;
     public float fireRocketRate;
     private float nextRocket;
     public GameObject light_point,particle_trail1,particle_trail2;
@@ -35,17 +37,21 @@ public class PlayerController : MonoBehaviour
     public float TimeFreeze;
     public GameObject stun;
     GameObject stunObj,obj,speedObj;
-    bool Onetime = false;
+    bool Onetime,OnetimeSpeed;
     ShakeCamera shakeCamera;
     public HealthBar healthBar;
     HealthShader healthShader;
     public float currentvalue;
-
+    GameObject[] ExistEnemy;
+    float CurrentspeedEnemy;
 
 
 
      void Start()
     {
+        CurrentspeedEnemy = GameObject.FindObjectOfType<Mover>().speed / 1.55f;
+        isSpeedUp = false;
+        defaultSpeed = speed;
         currentHeath = maxhealth;
         healthBar.Setmaxhealth(maxhealth);
         light_point.SetActive(false);
@@ -56,21 +62,25 @@ public class PlayerController : MonoBehaviour
         haze.Stop();
     }
     void Update()
-    {
-        if (ShieldParticle)
+    {   
+     
+        if(isSpeedUp==true)
         {
-           
-                FindObjectOfType<HealthShader>().material.SetFloat("_Shield", 1);
-                FindObjectOfType<HealthShader>().material.SetFloat("_Hit", 0);
-          
+            ExistEnemy = EnemiesFound();
+            SpeedDonwnEnemy(CurrentspeedEnemy);
+            if (!OnetimeSpeed)
+            {
+                SpeedUp();
+                OnetimeSpeed = true;
+            }
         }
-        else if (!ShieldParticle)
+        else if(isSpeedUp==false)
         {
-            
-           
-                FindObjectOfType<HealthShader>().material.SetFloat("_Shield", 0);
-            
+            ExistEnemy = EnemiesFound();
+            ResetSpeedEnemy();
+            ResetSpeed();
         }
+       
 
         if (currentHeath<=30)
         {if (!Onetime)
@@ -212,12 +222,10 @@ public class PlayerController : MonoBehaviour
         }
         if(other.CompareTag("ItemSpeedUp"))
         {
-            StartCoroutine(SpeedUp());
-            StartCoroutine(SpeedUpHit());
-            Instantiate(HitPartilce, other.gameObject.transform.position, other.gameObject.transform.rotation);
-            Destroy(other.gameObject);
-
-           
+                 Instantiate(HitPartilce, other.gameObject.transform.position, other.gameObject.transform.rotation);
+                 Destroy(other.gameObject);
+                StartCoroutine(ChangeSpeedUp());
+                StartCoroutine(SpeedUpHit());
         }  
         if(other.CompareTag("ItemShield"))
         {
@@ -277,7 +285,7 @@ public class PlayerController : MonoBehaviour
         FindObjectOfType<HealthShader>().material.SetFloat("_Hit", 0f);
 
     }
-    public IEnumerator SpeedUp()
+    void SpeedUp()
     {
             ParticleSystem Ps1 = particle_trail1.GetComponent<ParticleSystem>();
             ParticleSystem Ps2= particle_trail2.GetComponent<ParticleSystem>();
@@ -287,27 +295,23 @@ public class PlayerController : MonoBehaviour
             main1.startSpeed = 2.35f;
             main2.startColor = Color.cyan;
             main2.startSpeed = 2.35f;
-        Vector3 tranformObj = new Vector3(transform.position.x, transform.position.y,0.04f);
             FindObjectOfType<PlayerShader>().material.SetFloat("_SpeedUp", 1);
-            speedObj = Instantiate(ParticleSpeed, tranformObj, transform.rotation);
-            speedObj.transform.parent = transform;
             speed = speed * 1.5f;
-            Onetime = false;
-      
-        yield return new WaitForSeconds(5f);
-        ResetTrail();
-        FindObjectOfType<PlayerShader>().material.SetFloat("_SpeedUp",0);
-        speed = speed / 1.5f;
-        Destroy(speedObj);
 
     }
-    void ShieldUp()
+    
+     void ShieldUp()
     {
-        obj = Instantiate(ShieldParticle, transform.position, transform.rotation);
-        obj.transform.parent = transform;
+        var clone = Instantiate(ShieldParticle, transform.position, transform.rotation);
+        clone.transform.parent = transform;
+        if (clone)
+        {
 
+            FindObjectOfType<HealthShader>().material.SetFloat("_Shield", 1);
+            FindObjectOfType<HealthShader>().material.SetFloat("_Hit", 0);
 
-
+        }
+    
     }
     public IEnumerator SpeedUpHit()
     {
@@ -328,4 +332,64 @@ public class PlayerController : MonoBehaviour
         main2.startSpeed = Random.Range(0.6f, 1f);
 
     }
+    void ResetSpeed()
+    {
+        FindObjectOfType<PlayerShader>().material.SetFloat("_SpeedUp", 0);
+        ResetTrail();
+        speed = defaultSpeed;
+    }
+    IEnumerator ChangeSpeedUp()
+    {
+        Vector3 tranformObj = new Vector3(transform.position.x, transform.position.y, 0.04f);
+        speedObj = Instantiate(ParticleSpeed, tranformObj, transform.rotation);
+        speedObj.transform.parent = transform;
+        isSpeedUp = true;
+       yield return new WaitForSeconds(timeSpeedUp);
+        Destroy(speedObj);
+        isSpeedUp = false;
+
+    }
+    GameObject[] EnemiesFound()
+    {
+        List<GameObject> list = new List<GameObject>();
+        GameObject[] Enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach(GameObject obj in Enemies)
+        {
+                list.Add(obj);
+           
+   
+        }
+        return list.ToArray();
+    }
+    void SpeedDonwnEnemy(float currentspeed)
+    {if(ExistEnemy.Length==0)
+        {
+            return;
+        }
+
+        if (ExistEnemy.Length > 0)
+        {
+
+            for (int i = 0; i < ExistEnemy.Length; i++)
+            {
+                ExistEnemy[i].GetComponent<Mover>().speed = currentspeed;
+            }
+        }
+    }
+    void ResetSpeedEnemy()
+    {
+        if (ExistEnemy.Length == 0)
+        {
+            return;
+        }
+
+        if (ExistEnemy.Length > 0)
+        {
+            for (int i = 0; i < ExistEnemy.Length; i++)
+            {
+                ExistEnemy[i].GetComponent<Mover>().resetSpeed();
+            }
+        }
+    }
+
 }

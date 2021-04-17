@@ -26,6 +26,8 @@ public class GameController : MonoBehaviour
     public GameObject health;
     public GameObject[] enemy;
     public GameObject SpeedUp,Shield;
+    PlayerController playerController;
+    Mover mover;
  
     Test_background test_Background;
 
@@ -34,6 +36,8 @@ public class GameController : MonoBehaviour
     void Start()
 
     {
+        playerController = FindObjectOfType<PlayerController>();
+        mover = FindObjectOfType<Mover>();
         player = GameObject.FindGameObjectWithTag("Player");
         if (player)
         {
@@ -48,7 +52,7 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-        
+       
         enemy = GameObject.FindGameObjectsWithTag("Enemy");
         if (!player)
         {
