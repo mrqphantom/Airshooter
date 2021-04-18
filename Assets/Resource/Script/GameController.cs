@@ -28,7 +28,9 @@ public class GameController : MonoBehaviour
     public GameObject SpeedUp,Shield;
     PlayerController playerController;
     Mover mover;
- 
+    GameObject highlight;
+
+
     Test_background test_Background;
 
 
@@ -36,6 +38,8 @@ public class GameController : MonoBehaviour
     void Start()
 
     {
+        highlight = GameObject.Find("/Canvas/HighLight");
+        highlight.SetActive(false);
         playerController = FindObjectOfType<PlayerController>();
         mover = FindObjectOfType<Mover>();
         player = GameObject.FindGameObjectWithTag("Player");

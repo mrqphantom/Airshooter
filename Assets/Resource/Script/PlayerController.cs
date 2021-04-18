@@ -10,12 +10,29 @@ public class Boundary
 
 }
 public class PlayerController : MonoBehaviour
-{   public int maxhealth = 100;
+{
+    [Header("PlayerHealth")]
+    public int maxhealth = 100;
     public int currentHeath;
-    public Boundary boundary;
+
+    [Header("PlayerBullet")]
+    public bool IsShield;
+    public GameObject ShieldParticle;
+    public GameObject lazeStartParticle;
+    public GameObject smoke;
+    public GameObject rocket;
+    public GameObject ParticleSpeed;
+    public GameObject HitPartilce;
+
+    [Header("Speed")]
     public float speed = 0.5f;
     public float defaultSpeed;
-    public bool isSpeedUp=false;
+    public bool isSpeedUp = false;
+    float highSpeed;
+
+    public Boundary boundary;
+
+ 
     public float tilt;
     public Rigidbody rigid;
     public GameObject bullet;
@@ -27,7 +44,6 @@ public class PlayerController : MonoBehaviour
     public GameObject light_point,particle_trail1,particle_trail2;
     public GameObject muzzle1, muzzle2;
     public ParticleSystem haze;
-    public GameObject rocket, lazeStartParticle, smoke, ParticleSpeed,HitPartilce,ShieldParticle;
     RocketLauncher rocketLauncher;
     public GameObject laze;
     GameObject objLaze = null;
@@ -44,11 +60,14 @@ public class PlayerController : MonoBehaviour
     public float currentvalue;
     GameObject[] ExistEnemy;
     float CurrentspeedEnemy;
+    public GameObject highlight;
 
 
 
      void Start()
     {
+        highSpeed = speed * 1.5f;
+        highlight.SetActive(false);
         CurrentspeedEnemy = GameObject.FindObjectOfType<Mover>().speed / 1.55f;
         isSpeedUp = false;
         defaultSpeed = speed;
@@ -62,23 +81,21 @@ public class PlayerController : MonoBehaviour
         haze.Stop();
     }
     void Update()
-    {   
-     
-        if(isSpeedUp==true)
+    {
+        if (isSpeedUp==true)
         {
             ExistEnemy = EnemiesFound();
             SpeedDonwnEnemy(CurrentspeedEnemy);
-            if (!OnetimeSpeed)
-            {
-                SpeedUp();
-                OnetimeSpeed = true;
-            }
+            SpeedUp();
+           OnetimeSpeed = true;
+            
         }
         else if(isSpeedUp==false)
         {
             ExistEnemy = EnemiesFound();
             ResetSpeedEnemy();
             ResetSpeed();
+            ResetTrail();
         }
        
 
@@ -213,6 +230,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
+            StartCoroutine(HitHightlight());
             StartCoroutine(Hit());
             StartCoroutine(HitHealthBar());
             GameObject.Find("Main Camera").AddComponent<ShakeCamera>().shakeDuration = 20f;
@@ -250,7 +268,7 @@ public class PlayerController : MonoBehaviour
         speed /= 3;
         fireRate *= 2;
         yield return new WaitForSeconds(1f);
-        speed *= 3;
+        ResetSpeed();
         fireRate /= 2;
         Destroy(stunObj);
         Onetime = false;
@@ -260,6 +278,7 @@ public class PlayerController : MonoBehaviour
     {
         while(true)
         {
+            highlight.SetActive(true);
             yield return new WaitForSeconds(0.65f);
             light_point.GetComponent<Light>().color = Color.red;
             light_point.GetComponent<Light>().intensity = 0.35f;
@@ -271,10 +290,10 @@ public class PlayerController : MonoBehaviour
     }
     public IEnumerator Hit()
     {
-        
+      
         FindObjectOfType<PlayerShader>().material.SetFloat("_Hit", 1f);
         yield return new WaitForSeconds(0.75f);
-       FindObjectOfType<PlayerShader>().material.SetFloat("_Hit", 0f);
+        FindObjectOfType<PlayerShader>().material.SetFloat("_Hit", 0f);
         yield return new WaitForSeconds(0.1f);
 
     }
@@ -296,20 +315,24 @@ public class PlayerController : MonoBehaviour
             main2.startColor = Color.cyan;
             main2.startSpeed = 2.35f;
             FindObjectOfType<PlayerShader>().material.SetFloat("_SpeedUp", 1);
-            speed = speed * 1.5f;
+            speed = highSpeed;
 
     }
     
      void ShieldUp()
     {
-        var clone = Instantiate(ShieldParticle, transform.position, transform.rotation);
-        clone.transform.parent = transform;
-        if (clone)
+        if (IsShield==false)
         {
+            var clone = Instantiate(ShieldParticle, transform.position, transform.rotation);
+            clone.transform.parent = transform;
+            if (clone)
+            {
 
-            FindObjectOfType<HealthShader>().material.SetFloat("_Shield", 1);
-            FindObjectOfType<HealthShader>().material.SetFloat("_Hit", 0);
+                FindObjectOfType<HealthShader>().material.SetFloat("_Shield", 1);
+                FindObjectOfType<HealthShader>().material.SetFloat("_Hit", 0);
 
+            }
+            IsShield = true;
         }
     
     }
@@ -335,7 +358,6 @@ public class PlayerController : MonoBehaviour
     void ResetSpeed()
     {
         FindObjectOfType<PlayerShader>().material.SetFloat("_SpeedUp", 0);
-        ResetTrail();
         speed = defaultSpeed;
     }
     IEnumerator ChangeSpeedUp()
@@ -391,5 +413,11 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
+   IEnumerator HitHightlight()
+    {
+        highlight.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        highlight.SetActive(false);
+    }
+  
 }

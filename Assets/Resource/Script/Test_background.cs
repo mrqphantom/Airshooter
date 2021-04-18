@@ -32,7 +32,7 @@ public class Test_background : MonoBehaviour
     }
     void defaultSpeed()
     {
-        Materialspeed.SetFloat("SpeedBackground", speedBackground+=Time.deltaTime/7);
+        Materialspeed.SetFloat("SpeedBackground", speedBackground+=Time.deltaTime/4);
     }
     void SlowSpeed()
     {

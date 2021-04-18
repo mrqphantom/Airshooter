@@ -15,6 +15,7 @@ public class Shield : MonoBehaviour
     public List<ParticleCollisionEvent> collisionEvents;
     public GameObject HitShield;
     HealthShader healthShader;
+    PlayerController playerController;
 
 
 
@@ -59,6 +60,7 @@ public class Shield : MonoBehaviour
         particleMain.loop = false;
         yield return new WaitForSeconds(2f);
         FindObjectOfType<HealthShader>().material.SetFloat("_Shield", 0);
+        FindObjectOfType<PlayerController>().IsShield = false;
         Destroy(gameObject);
 
     }
