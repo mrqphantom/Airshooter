@@ -11,7 +11,8 @@ public class GameUI : MonoBehaviour
     public GameObject PausePanel;
     public GameObject LosePanel;
     GameObject Player;
-    bool isPause =false;
+    public bool isPause =false;
+    
   
     // Start is called before the first frame update
     void Start()
@@ -40,13 +41,15 @@ public class GameUI : MonoBehaviour
         }
         if(isPause == true)
         {
+            Time.timeScale = 0f;
             PausePanel.SetActive(true);
-            Time.timeScale = 0;
+       
         }
         if(isPause==false)
         {
+            Time.timeScale = 1f;
             PausePanel.SetActive(false);
-            Time.timeScale = 1;
+       
         }
         if(Player==null)
         {

@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
     public float TimeFreeze;
     public GameObject stun;
     GameObject stunObj,obj,speedObj;
-    bool Onetime,OnetimeSpeed;
+    bool Onetime;
     ShakeCamera shakeCamera;
     public HealthBar healthBar;
     HealthShader healthShader;
@@ -61,11 +61,17 @@ public class PlayerController : MonoBehaviour
     GameObject[] ExistEnemy;
     float CurrentspeedEnemy;
     public GameObject highlight;
+    public TimeScale timeScale;
+    bool Scaledowntime;
+    public GameUI gameUI;
+   
+   
 
 
 
      void Start()
     {
+        
         highSpeed = speed * 1.5f;
         highlight.SetActive(false);
         CurrentspeedEnemy = GameObject.FindObjectOfType<Mover>().speed / 1.55f;
@@ -81,13 +87,19 @@ public class PlayerController : MonoBehaviour
         haze.Stop();
     }
     void Update()
-    {
+    {   if((Scaledowntime==true)&&(gameUI.isPause==false))
+        {
+            timeScale.DoSlowmotion(0.55f);
+        }
+        else if((Scaledowntime==false) && (gameUI.isPause == false))
+        {
+            timeScale.DoSlowmotion(1f);
+        }
         if (isSpeedUp==true)
         {
             ExistEnemy = EnemiesFound();
             SpeedDonwnEnemy(CurrentspeedEnemy);
             SpeedUp();
-           OnetimeSpeed = true;
             
         }
         else if(isSpeedUp==false)
@@ -110,6 +122,7 @@ public class PlayerController : MonoBehaviour
         }
         if ((Input.GetKey(KeyCode.Space)) && Time.time > nextFire)
         {
+          
             StartCoroutine(waitMuzzle());
             nextFire = Time.time + fireRate;
             Instantiate(bullet, firePoint1.position, firePoint1.rotation);
@@ -230,6 +243,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
+            StartCoroutine(scaledownTime());
             StartCoroutine(HitHightlight());
             StartCoroutine(Hit());
             StartCoroutine(HitHealthBar());
@@ -415,9 +429,18 @@ public class PlayerController : MonoBehaviour
     }
    IEnumerator HitHightlight()
     {
+        timeScale.DoSlowmotion(0.5f);
         highlight.SetActive(true);
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(1f);
         highlight.SetActive(false);
+ 
     }
+    IEnumerator scaledownTime()
+    {
+        Scaledowntime = true;
+        yield return new WaitForSeconds(0.5f);
+        Scaledowntime = false;
+    }
+ 
   
 }
