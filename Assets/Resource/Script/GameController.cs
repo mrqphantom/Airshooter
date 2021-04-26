@@ -25,7 +25,7 @@ public class GameController : MonoBehaviour
     DestroybyContact destroybyContact;
     public GameObject health;
     public GameObject[] enemy;
-    public GameObject SpeedUp,Shield;
+    public GameObject SpeedUp,Shield,Health;
     PlayerController playerController;
     Mover mover;
     GameObject highlight;
@@ -50,6 +50,7 @@ public class GameController : MonoBehaviour
             StartCoroutine(Dissolve());
             StartCoroutine(spawnSpeedItem());
             StartCoroutine(spawnShieldItem());
+            StartCoroutine(spawnHealthItem());
         }
 
     }
@@ -161,6 +162,25 @@ public class GameController : MonoBehaviour
                 yield return new WaitForSeconds(15f);
             }
             yield return new WaitForSeconds(10f);
+
+        }
+
+
+    }
+    IEnumerator spawnHealthItem()
+    {
+        yield return new WaitForSeconds(8f);
+        while (player != null)
+
+        {
+            for (int i = 0; i < 1; i++)
+            {
+                Vector3 spawnPosition = new Vector3(Random.Range(-0.217f, 0.318f), spawnValues.y, -0.0094f);
+                Quaternion spawnRotation = new Quaternion();
+                Instantiate(Health, spawnPosition, spawnRotation);
+                yield return new WaitForSeconds(20f);
+            }
+            yield return new WaitForSeconds(12f);
 
         }
 

@@ -87,7 +87,11 @@ public class PlayerController : MonoBehaviour
         haze.Stop();
     }
     void Update()
-    {   if((Scaledowntime==true)&&(gameUI.isPause==false))
+    {   if(currentHeath>=maxhealth)
+        {
+            currentHeath = maxhealth;
+        }
+        if((Scaledowntime==true)&&(gameUI.isPause==false))
         {
             timeScale.DoSlowmotion(0.55f);
         }
@@ -119,6 +123,10 @@ public class PlayerController : MonoBehaviour
                 Onetime = true;
             }
             StartCoroutine(LowHealth());
+        }
+        else if(currentHeath>30)
+        {
+            StopCoroutine(LowHealth());
         }
         if ((Input.GetKey(KeyCode.Space)) && Time.time > nextFire)
         {
@@ -252,22 +260,28 @@ public class PlayerController : MonoBehaviour
             GameObject.Find("Main Camera").AddComponent<ShakeCamera>().decreaseFactor = 10f;
             StartCoroutine(OnCollisionWithObstacle());
         }
-        if(other.CompareTag("ItemSpeedUp"))
+        if (other.CompareTag("ItemSpeedUp"))
         {
-                 Instantiate(HitPartilce, other.gameObject.transform.position, other.gameObject.transform.rotation);
-                 Destroy(other.gameObject);
-                StartCoroutine(ChangeSpeedUp());
-                StartCoroutine(SpeedUpHit());
-        }  
-        if(other.CompareTag("ItemShield"))
-        {
-            
-                ShieldUp();
-                Destroy(other.gameObject);
-                Instantiate(HitPartilce, other.gameObject.transform.position, other.gameObject.transform.rotation);
-            
+            Instantiate(HitPartilce, other.gameObject.transform.position, other.gameObject.transform.rotation);
+            Destroy(other.gameObject);
+            StartCoroutine(ChangeSpeedUp());
+            StartCoroutine(SpeedUpHit());
         }
+        if (other.CompareTag("ItemShield"))
+        {
 
+            ShieldUp();
+            Destroy(other.gameObject);
+            Instantiate(HitPartilce, other.gameObject.transform.position, other.gameObject.transform.rotation);
+
+        }
+        if (other.CompareTag("ItemHealth"))
+        {
+            currentHeath += 20;
+            Destroy(other.gameObject);
+            Instantiate(HitPartilce, other.gameObject.transform.position, other.gameObject.transform.rotation);
+
+        }
     }
     public IEnumerator OnCollisionWithObstacle()
     {
@@ -290,8 +304,8 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator LowHealth()
     {
-        while(true)
-        {
+       
+        
             highlight.SetActive(true);
             yield return new WaitForSeconds(0.65f);
             light_point.GetComponent<Light>().color = Color.red;
@@ -300,7 +314,7 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSeconds(0.3f);
             light_point.SetActive(false);
 
-        }
+            
     }
     public IEnumerator Hit()
     {

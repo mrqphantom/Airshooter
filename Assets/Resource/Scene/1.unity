@@ -1693,6 +1693,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8858475808884549130, guid: a2150d8f660dca34694ad7f9a49a8103,
         type: 3}
+      propertyPath: Health
+      value: 
+      objectReference: {fileID: 5726093298077379379, guid: c4457d8215a57f34a8f727d12839dff6,
+        type: 3}
+    - target: {fileID: 8858475808884549130, guid: a2150d8f660dca34694ad7f9a49a8103,
+        type: 3}
       propertyPath: Shield
       value: 
       objectReference: {fileID: 5726093298077379379, guid: b2d45e39a33b91e4cbeaaab76782206c,
