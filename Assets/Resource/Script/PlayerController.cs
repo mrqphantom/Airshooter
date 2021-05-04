@@ -52,18 +52,18 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem playerExplosion;
     public float TimeFreeze;
     public GameObject stun;
-    GameObject stunObj,obj,speedObj;
-    bool Onetime;
+    GameObject stunObj,obj,speedObj,smokeObj;
+    bool OnetimeSmoke,OnetimeStun;
     ShakeCamera shakeCamera;
-    public HealthBar healthBar;
     HealthShader healthShader;
     public float currentvalue;
     GameObject[] ExistEnemy;
     float CurrentspeedEnemy;
-    public GameObject highlight;
+    public GameObject highlight,slowTime,highlight2;
     public TimeScale timeScale;
     bool Scaledowntime;
     public GameUI gameUI;
+    public bool lowhealth;
    
    
 
@@ -71,14 +71,14 @@ public class PlayerController : MonoBehaviour
 
      void Start()
     {
-        
+        highlight2.SetActive(false);
         highSpeed = speed * 1.5f;
         highlight.SetActive(false);
+        slowTime.SetActive(false);
         CurrentspeedEnemy = GameObject.FindObjectOfType<Mover>().speed / 1.55f;
         isSpeedUp = false;
         defaultSpeed = speed;
         currentHeath = maxhealth;
-        healthBar.Setmaxhealth(maxhealth);
         light_point.SetActive(false);
         muzzle1.SetActive(false);
         muzzle2.SetActive(false);
@@ -114,20 +114,23 @@ public class PlayerController : MonoBehaviour
             ResetTrail();
         }
        
-
-        if (currentHeath<=30)
-        {if (!Onetime)
+     
+        if(currentHeath<30)
+        { if (OnetimeSmoke == false)
             {
-                obj = Instantiate(smoke, transform.position, Quaternion.identity);
-                obj.transform.parent = transform;
-                Onetime = true;
+                smokeObj = Instantiate(smoke, transform.position, transform.rotation);
+                smokeObj.transform.parent = transform;
+                OnetimeSmoke = true;
             }
-            StartCoroutine(LowHealth());
+            StartCoroutine(Lowhealth());
         }
-        else if(currentHeath>30)
+        else if (currentHeath >= 30) 
         {
-            StopCoroutine(LowHealth());
+            Destroy(smokeObj);
+            OnetimeSmoke= false;
+            NormalHealth();
         }
+
         if ((Input.GetKey(KeyCode.Space)) && Time.time > nextFire)
         {
           
@@ -235,8 +238,7 @@ public class PlayerController : MonoBehaviour
     {
         
         currentHeath -= damage;
-    
-        healthBar.setHealth(currentHeath);
+
     }
     IEnumerator Death()
     {
@@ -251,6 +253,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
+          
             StartCoroutine(scaledownTime());
             StartCoroutine(HitHightlight());
             StartCoroutine(Hit());
@@ -259,6 +262,7 @@ public class PlayerController : MonoBehaviour
             GameObject.Find("Main Camera").AddComponent<ShakeCamera>().shakeAmount = 1f;
             GameObject.Find("Main Camera").AddComponent<ShakeCamera>().decreaseFactor = 10f;
             StartCoroutine(OnCollisionWithObstacle());
+      
         }
         if (other.CompareTag("ItemSpeedUp"))
         {
@@ -285,36 +289,36 @@ public class PlayerController : MonoBehaviour
     }
     public IEnumerator OnCollisionWithObstacle()
     {
-        if (!Onetime)
-        {
-            stunObj = Instantiate(stun, transform.position, transform.rotation);
-            stunObj.transform.parent = transform;
-            Onetime = true;
-          
-        }
-     
-        speed /= 3;
-        fireRate *= 2;
+            if (OnetimeStun == false)
+            {
+                stunObj = Instantiate(stun, transform.position, transform.rotation);
+                stunObj.transform.parent = transform;
+                OnetimeStun = true;
+            }
+            speed /= 3;
+        fireRate *= 3;
         yield return new WaitForSeconds(1f);
         ResetSpeed();
-        fireRate /= 2;
+        fireRate /= 3;
         Destroy(stunObj);
-        Onetime = false;
+        OnetimeStun = false;
     }
 
-    IEnumerator LowHealth()
+    IEnumerator Lowhealth()
     {
-       
-        
-            highlight.SetActive(true);
             yield return new WaitForSeconds(0.65f);
             light_point.GetComponent<Light>().color = Color.red;
             light_point.GetComponent<Light>().intensity = 0.35f;
             light_point.SetActive(true);
             yield return new WaitForSeconds(0.3f);
-            light_point.SetActive(false);
+            light_point.SetActive(false);    
+    }
+ 
+    public void NormalHealth()
+    {
+        highlight.SetActive(false);
+        light_point.GetComponent<Light>().intensity=0f;
 
-            
     }
     public IEnumerator Hit()
     {
@@ -390,12 +394,14 @@ public class PlayerController : MonoBehaviour
     }
     IEnumerator ChangeSpeedUp()
     {
+        slowTime.SetActive(true);
         Vector3 tranformObj = new Vector3(transform.position.x, transform.position.y, 0.04f);
         speedObj = Instantiate(ParticleSpeed, tranformObj, transform.rotation);
         speedObj.transform.parent = transform;
         isSpeedUp = true;
        yield return new WaitForSeconds(timeSpeedUp);
         Destroy(speedObj);
+        slowTime.SetActive(false);
         isSpeedUp = false;
 
     }
@@ -443,12 +449,13 @@ public class PlayerController : MonoBehaviour
     }
    IEnumerator HitHightlight()
     {
+        highlight2.SetActive(true);
         timeScale.DoSlowmotion(0.5f);
-        highlight.SetActive(true);
         yield return new WaitForSeconds(1f);
-        highlight.SetActive(false);
+        highlight2.SetActive(false);
  
     }
+
     IEnumerator scaledownTime()
     {
         Scaledowntime = true;

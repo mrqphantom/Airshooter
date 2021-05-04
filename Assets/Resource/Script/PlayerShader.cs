@@ -29,5 +29,9 @@ public class PlayerShader : MonoBehaviour
         {
             material.SetFloat("_Low_health", 1);
         }
+        else if(range>=0.4)
+        {
+            material.SetFloat("_Low_health", 0);
+        }
     }
 }
